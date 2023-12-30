@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 import com.project.blog.service.AuthService;
+import com.project.blog.dto.LoginRequest;
 import com.project.blog.dto.RegisterRequest;
 @RestController
 @RequestMapping("/api/auth/")
@@ -28,5 +29,9 @@ public class AuthContoller {
 		
 	}
 	
+	 @PostMapping("/login")
+	    public String login(@RequestBody LoginRequest loginRequest) {
+	        return authservice.login(loginRequest);
+	    }
 	
 }
