@@ -10,6 +10,6 @@ import com.project.blog.model.User;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long>{
 
-	Optional<User> findByUsername(String userName) ;
+	Optional<User> findByUserName(String userName) ;
 
 }

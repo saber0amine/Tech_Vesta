@@ -3,7 +3,6 @@ package com.project.blog.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,11 +18,11 @@ import com.project.blog.dto.RegisterRequest;
 public class AuthContoller {
 	
 	@Autowired
-	private AuthService authservice ;
+	private AuthService authService ;
 
 	@PostMapping("/signup")
 	public ResponseEntity signup(@RequestBody RegisterRequest registerRequest ) {
-		authservice.signup(registerRequest);
+		authService.signup(registerRequest);
 
 		return new ResponseEntity(HttpStatus.OK);
 		
@@ -31,7 +30,7 @@ public class AuthContoller {
 	
 	 @PostMapping("/login")
 	    public String login(@RequestBody LoginRequest loginRequest) {
-	        return authservice.login(loginRequest);
+	        return authService.login(loginRequest);
 	    }
 	
 }

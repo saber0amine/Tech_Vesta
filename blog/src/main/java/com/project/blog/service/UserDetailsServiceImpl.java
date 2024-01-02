@@ -19,7 +19,7 @@ private UserRepository userRepository ;
 	
 	@Override
 	public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
-		User user = (User) userRepository.findByUsername(userName).orElseThrow( () -> new UsernameNotFoundException("No user found" + userName ) ) ; 
+		User user = (User) userRepository.findByUserName(userName).orElseThrow( () -> new UsernameNotFoundException("No user found" + userName ) ) ; 
 		   return new org.springframework.security.core.userdetails.User(user.getUsername(),
 	                user.getPassword(),
 	                true, true, true, true,

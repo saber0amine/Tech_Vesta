@@ -34,6 +34,7 @@ private JwtProvider jwtProvider ;
 	        user.setEmail(registerRequest.getEmail());
 	        user.setPassword(encodePassword(registerRequest.getPassword() )  );
 
+
 	        userRepository.save(user);
 	    } 
 	   
@@ -43,7 +44,7 @@ private JwtProvider jwtProvider ;
 	   } 
 	   
 	    public String login(LoginRequest loginRequest) {
-	        Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUsername(),
+	        Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUserName(),
 	                loginRequest.getPassword()));
 	        SecurityContextHolder.getContext().setAuthentication(authenticate);
 	        return  jwtProvider.generateToken(authenticate); 
