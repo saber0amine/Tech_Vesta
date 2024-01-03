@@ -10,10 +10,11 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest  ;
+import jakarta.servlet.http.HttpServletResponse;
+
 import java.io.IOException;
 
 public class JwtAuthenticationFilter extends OncePerRequestFilter { /*the method doFilterInternal will be excuted once for each http request 
@@ -34,9 +35,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter { /*the method
 
 
 	@Override
-	protected void doFilterInternal(jakarta.servlet.http.HttpServletRequest request,
-			jakarta.servlet.http.HttpServletResponse response, jakarta.servlet.FilterChain filterChain)
-			throws jakarta.servlet.ServletException, IOException { //md called for each incoming HTTP request.
+	protected void doFilterInternal(HttpServletRequest request,
+			HttpServletResponse response, FilterChain filterChain)
+			throws ServletException, IOException { //md called for each incoming HTTP request.
         String jwt = getJwtFromRequest(request);
 
         if(StringUtils.hasText(jwt) && jwtProvider.validateToken(jwt)){ /* test the validation of the token 
@@ -46,14 +47,14 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter { /*the method
             UserDetails userDetails = userDetailsService.loadUserByUsername(username);
             UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails,
                     null, userDetails.getAuthorities());
-            authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails((jakarta.servlet.http.HttpServletRequest) request));
+            authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails((HttpServletRequest) request));
 
             SecurityContextHolder.getContext().setAuthentication(authentication);
         }
         filterChain.doFilter(request, response);		
 	}
 
-    private String getJwtFromRequest(jakarta.servlet.http.HttpServletRequest request) {
+    private String getJwtFromRequest(HttpServletRequest request) {
         String bearerToken = request.getHeader("Authorization");
 
         if(StringUtils.hasText(bearerToken) && bearerToken.startsWith("Bearer ")) {

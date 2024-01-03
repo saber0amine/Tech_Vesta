@@ -1,5 +1,7 @@
 package com.project.blog.model;
 
+import org.hibernate.mapping.List;
+
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -20,6 +22,11 @@ private String password ;
 
 @Column
 private String email ; 
+
+
+@ManyToOne(targetEntity = Post.class, fetch = FetchType.LAZY   )
+@JoinColumn(name ="post_user_id")
+private java.util.List<Post> post  ; 
 
 
 	

@@ -1,4 +1,6 @@
 package com.project.blog.service;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -49,5 +51,12 @@ private JwtProvider jwtProvider ;
 	        SecurityContextHolder.getContext().setAuthentication(authenticate);
 	        return  jwtProvider.generateToken(authenticate); 
 	        }
+
+
+			public/* Optional<org.springframework.security.core.userdetails.User>*/ String getCurrentUser() { // I will import user like this cz , we have already user entity imported .. that make confilct between them . 
+	        org.springframework.security.core.userdetails.User principal = (org.springframework.security.core.userdetails.User) SecurityContextHolder.
+	                getContext().getAuthentication().getPrincipal();
+			return /* Optional.of(principal) */ principal.getUsername();
+	    }
 	    
 }
