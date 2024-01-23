@@ -30,7 +30,9 @@ public class AuthContoller {
 	
 	 @PostMapping("/login")
 	    public String login(@RequestBody LoginRequest loginRequest) {
-	        return authService.login(loginRequest);
+		 	System.out.println("this is the name here " +loginRequest.getUserName( ) + "and the pass is :" +loginRequest.getPassword());
+	        return authService.login(loginRequest) ;
+	        
 	    }
 	
 }

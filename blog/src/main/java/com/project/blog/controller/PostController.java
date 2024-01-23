@@ -13,16 +13,47 @@ import java.util.List;
 @RequestMapping("/api/posts/")
 public class PostController {
 	
+    @Autowired
+    private PostService postService;
 
-	    @Autowired
-	    private PostService postService;
+    @PostMapping
+    public ResponseEntity createPost(@RequestBody PostDto postDto) {
+        postService.createPost(postDto);
+        return new ResponseEntity(HttpStatus.OK);
+    }
 
-	    @PostMapping
-	    public ResponseEntity createPost(@RequestBody PostDto postDto) {
-	        postService.createPost(postDto);
-	        return new ResponseEntity(HttpStatus.OK);
-	    }
+    @GetMapping("/all")
+    public ResponseEntity<List<PostDto>> showAllPosts() {
+        return new ResponseEntity<>(postService.showAllPosts(), HttpStatus.OK);
+    }
 
+    @GetMapping("/get/{id}")
+    public ResponseEntity<PostDto> getSinglePost(@PathVariable @RequestBody Long id) {
+        return new ResponseEntity<>(postService.readSinglePost(id), HttpStatus.OK);
+    }
 
 	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

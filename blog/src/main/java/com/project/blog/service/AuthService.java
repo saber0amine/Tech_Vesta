@@ -49,6 +49,7 @@ private JwtProvider jwtProvider ;
 	        Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUserName(),
 	                loginRequest.getPassword()));
 	        SecurityContextHolder.getContext().setAuthentication(authenticate);
+System.out.println("**********************************from service *************************************** " );
 	        return  jwtProvider.generateToken(authenticate); 
 	        }
 
@@ -60,3 +61,20 @@ private JwtProvider jwtProvider ;
 	    }
 	    
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

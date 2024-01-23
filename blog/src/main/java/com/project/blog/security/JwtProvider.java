@@ -25,6 +25,8 @@ public class JwtProvider {
 	
 	public String generateToken(Authentication authentication) {
 		User pricipal = (User)authentication.getPrincipal() ;
+		System.out.println("**********************************from token class *************************************** " );
+
 		return Jwts.builder().setSubject(pricipal.getUsername()).signWith(key).compact();
 	}
     public boolean validateToken(String jwt) {
