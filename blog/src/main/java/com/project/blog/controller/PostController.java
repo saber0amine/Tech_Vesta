@@ -20,8 +20,8 @@ public class PostController {
     @Autowired
     private PostService postService;
     
-    @GetMapping("/aboutPage")
-    public String aboutPage(Model model) {
+    @GetMapping("/CreationPostPage")
+    public String CreationPostPage(Model model) {
         model.addAttribute("post", new Post());
 
     	return "addPost" ;

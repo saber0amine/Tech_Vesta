@@ -26,10 +26,10 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto py-4 py-lg-0">
-                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="index.html">Home</a></li>
-                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="about.html">About</a></li>
-                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="post.html">Sample Post</a></li>
-                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="contact.html">Contact</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" th:href="@{/}">Home</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" th:href="@{/aboutPage}">About</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" th:href="@{/postPage}">Sample Post</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" th:href="@{/contactPage}">Contact</a></li>
                     </ul>
                 </div>
             </div>
@@ -56,7 +56,7 @@
                 <div class="row gx-4 gx-lg-5 justify-content-center">
                     <div class="col-md-6">
                         <div class="team-member">
-                            <img class="mx-auto rounded-circle" src="assets/img/oumoussa.jpg"  width="250px;" alt="Salma Oumoussa">
+                            <img class="mx-auto rounded-circle" src="/assets/img/oumoussa.jpg"  width="250px" alt="Salma Oumoussa">
                             <h4>Salma Oumoussa</h4>
                             <p class="text-muted">Engineering Student</p>
                             <p class="text-muted">Passionate about technology and innovation, Salma brings her expertise to the project with a focus on creating an engaging and seamless user experience.</p>
@@ -64,7 +64,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="team-member">
-                            <img class="mx-auto rounded-circle" src="assets/img/saber.jpg"width="250px; alt="Saber Amine">
+                            <img class="mx-auto rounded-circle" src="/assets/img/saber.jpg" width="250px"  alt="Saber Amine">
                             <h4>Saber Amine</h4>
                             <p class="text-muted">Engineering Student</p>
                             <p class="text-muted">With a strong background in software development, Saber is dedicated to crafting the backend of our project using Spring Boot. His attention to detail ensures the project's robustness and efficiency.</p>

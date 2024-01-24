@@ -47,6 +47,14 @@ public String signup(Model model) {
 	
 }
 
+
+
+@GetMapping("/postPage")
+public String postPage() {
+
+	return "post" ;
+	
+}
 @GetMapping("/loginPage")
 public String loginPage(Model model) {
     model.addAttribute("user", new User());
@@ -57,21 +65,17 @@ public String loginPage(Model model) {
 
 @GetMapping("/contactPage")
 public String contactPage(Model model) {
-    model.addAttribute("user", new User());
 
 	return "contact" ;
 	
 }
 
+@GetMapping("/aboutPage")
+public String aboutPage(Model model) {
 
-
-//@GetMapping("/aboutPage")
-//public String aboutPage(Model model) {
-//    model.addAttribute("user", new User());
-//
-//	return "addPost" ;
-//	
-//}
+	return "about" ;
+	
+}
 
 
 @PostMapping("/saveUser")
