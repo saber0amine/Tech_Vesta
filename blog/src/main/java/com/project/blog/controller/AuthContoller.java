@@ -17,6 +17,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 import com.project.blog.service.AuthService;
+
+import jakarta.servlet.http.HttpServletResponse;
+
 import com.project.blog.dto.LoginRequest;
 import com.project.blog.dto.RegisterRequest;
 import com.project.blog.exception.UserNotFoundExecption;
@@ -92,13 +95,13 @@ public String saveUser(Model model , @ModelAttribute("user") User user , Binding
 
 	
 	 @PostMapping("/login")
-	 public String login(@ModelAttribute("user") User user, Model model) {
+	 public String login(@ModelAttribute("user") User user, Model model , HttpServletResponse response ) {
 	     try {
 	         User userExist = userRepository.findByEmail(user.getEmail())
 	                 .orElseThrow(() -> new UserNotFoundExecption("we are sorry !! but can you try again  " ));
 
 	         user.setUserName(userExist.getUserName());
-    		 authService.login(user) ;
+    		 authService.login(user , response) ;
 	         return "BlogPage";
 	     } catch (UserNotFoundExecption e) {
 	         model.addAttribute("error", e.getMessage());
