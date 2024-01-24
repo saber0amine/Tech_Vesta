@@ -37,7 +37,7 @@ public class SecurityConfig   {
 	                    .requestMatchers("/api/auth/**" , "/**" , "/css/**", "/js/**", "/images/**").permitAll()
 	                    .anyRequest().authenticated()
 	            );
-//	        http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
+	        http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
 
 	        return http.build();
 	    }

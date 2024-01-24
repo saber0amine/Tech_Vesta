@@ -6,6 +6,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -30,22 +31,10 @@ private AuthenticationManager authenticationManager ;
 @Autowired
 private JwtProvider jwtProvider ; 
 
-//	   public void signup(RegisterRequest registerRequest) {
-//	        User user = new User();
-//	        user.setUserName(registerRequest.getUsername());
-//	        user.setEmail(registerRequest.getEmail());
-//	        user.setPassword(encodePassword(registerRequest.getPassword() )  );
-//	    	System.out.println("from service username ***********************************************" + user.getUserName());
-//	    	System.out.println("email ***********************************************" + registerRequest.getEmail());
-//	    	System.out.println("password ***********************************************" + encodePassword(registerRequest.getPassword() ));
-//
-//	        userRepository.save(user);
-//	    } 
-//	   
-	   
+   
 public void signup(User user ) {
 	    
-
+ user.setPassword(encodePassword(user.getPassword() ));
  userRepository.save(user);
 } 
 
@@ -61,16 +50,58 @@ public void signup(User user ) {
 	        Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getUserName(),
 	                user.getPassword()));
 	        SecurityContextHolder.getContext().setAuthentication(authenticate);
+	        System.out.println("form service ******************************************************* " + jwtProvider.generateToken(authenticate));
+	        System.out.println("form service ******************************************************* " + authenticate.getDetails() + "****" 
+	        + authenticate.getPrincipal() + "from security "
+	        +SecurityContextHolder.getContext().getAuthentication().getPrincipal().getClass() );
 	        return  jwtProvider.generateToken(authenticate); 
 	        }
-
-
-			public/* Optional<org.springframework.security.core.userdetails.User>*/ String getCurrentUser() { // I will import user like this cz , we have already user entity imported .. that make confilct between them . 
-	        org.springframework.security.core.userdetails.User principal = (org.springframework.security.core.userdetails.User) SecurityContextHolder.
-	                getContext().getAuthentication().getPrincipal();
-			return /* Optional.of(principal) */ principal.getUsername();
-	    }
 	    
+	    
+//	    public String login(User user) {
+//	        Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getUserName(),
+//	                user.getPassword()));
+//	        SecurityContextHolder.getContext().setAuthentication(authenticate);
+//
+//	        UserDetails userDetails = (UserDetails) authenticate.getPrincipal();
+//
+//	        System.out.println("form service ******************************************************* " + jwtProvider.generateToken(authenticate));
+//	        System.out.println("form service ******************************************************* UserDetails: " + userDetails.getUsername() + " **** " +
+//	                userDetails.getPassword() + " **** " +
+//	                userDetails.getAuthorities() + " from security " +
+//	                SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+//
+//	        return jwtProvider.generateToken(authenticate);
+//	    }
+
+
+
+//			public Optional<org.springframework.security.core.userdetails.User> getCurrentUser() { // I will import user like this cz , we have already user entity imported .. that make confilct between them . 
+//	        org.springframework.security.core.userdetails.User principal = (org.springframework.security.core.userdetails.User) SecurityContextHolder.
+//	                getContext().getAuthentication().getPrincipal();
+//			return Optional.of(principal) ; //principal.getUsername();
+//	    }
+//	    
+//			public String getCurrentUserUsername() {
+//			    org.springframework.security.core.userdetails.User principal = (org.springframework.security.core.userdetails.User) SecurityContextHolder
+//			            .getContext().getAuthentication().getPrincipal();
+//			      System.out.println("from auth Service ******************************************************* " +principal.getUsername( ) );
+//
+//			    return principal.getUsername();
+//			}
+
+	   
+
+	    public String getCurrentUserUsername() {
+	        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+	        if (principal instanceof UserDetails) {
+	            return ((UserDetails) principal).getUsername();
+	        } else {
+	            return "Unable to retrieve the username. Please check your authentication.";
+	        }
+	    }
+
 }
 
 

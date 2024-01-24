@@ -23,7 +23,7 @@ private String userName ;
 @Column
 private String password ; 
 
-@Column
+@Column(unique=true)
 @NotBlank(message = "email cannot be blank")
 private String email ; 
 
