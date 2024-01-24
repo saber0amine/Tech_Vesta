@@ -67,43 +67,7 @@ public void signup(User user ) {
 	        return jwt;	        
 	        }
 	    
-//	    
-//	    System.out.println("form service ******************************************************* " + jwtProvider.generateToken(authenticate));
-//        System.out.println("form service ******************************************************* " + authenticate.getDetails() + "****" 
-//        + authenticate.getPrincipal() + "from security "
-//        +SecurityContextHolder.getContext().getAuthentication().getPrincipal().getClass() );
-	    
-//	    public String login(User user) {
-//	        Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getUserName(),
-//	                user.getPassword()));
-//	        SecurityContextHolder.getContext().setAuthentication(authenticate);
-//
-//	        UserDetails userDetails = (UserDetails) authenticate.getPrincipal();
-//
-//	        System.out.println("form service ******************************************************* " + jwtProvider.generateToken(authenticate));
-//	        System.out.println("form service ******************************************************* UserDetails: " + userDetails.getUsername() + " **** " +
-//	                userDetails.getPassword() + " **** " +
-//	                userDetails.getAuthorities() + " from security " +
-//	                SecurityContextHolder.getContext().getAuthentication().getPrincipal());
-//
-//	        return jwtProvider.generateToken(authenticate);
-//	    }
 
-
-
-//			public Optional<org.springframework.security.core.userdetails.User> getCurrentUser() { // I will import user like this cz , we have already user entity imported .. that make confilct between them . 
-//	        org.springframework.security.core.userdetails.User principal = (org.springframework.security.core.userdetails.User) SecurityContextHolder.
-//	                getContext().getAuthentication().getPrincipal();
-//			return Optional.of(principal) ; //principal.getUsername();
-//	    }
-//	    
-//			public String getCurrentUserUsername() {
-//			    org.springframework.security.core.userdetails.User principal = (org.springframework.security.core.userdetails.User) SecurityContextHolder
-//			            .getContext().getAuthentication().getPrincipal();
-//			      System.out.println("from auth Service ******************************************************* " +principal.getUsername( ) );
-//
-//			    return principal.getUsername();
-//			}
 
 	   
 	    public String getCurrentUserUsername() {
@@ -122,6 +86,43 @@ public void signup(User user ) {
 
 
 
+//
+//System.out.println("form service ******************************************************* " + jwtProvider.generateToken(authenticate));
+//System.out.println("form service ******************************************************* " + authenticate.getDetails() + "****" 
+//+ authenticate.getPrincipal() + "from security "
+//+SecurityContextHolder.getContext().getAuthentication().getPrincipal().getClass() );
+
+//public String login(User user) {
+//    Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getUserName(),
+//            user.getPassword()));
+//    SecurityContextHolder.getContext().setAuthentication(authenticate);
+//
+//    UserDetails userDetails = (UserDetails) authenticate.getPrincipal();
+//
+//    System.out.println("form service ******************************************************* " + jwtProvider.generateToken(authenticate));
+//    System.out.println("form service ******************************************************* UserDetails: " + userDetails.getUsername() + " **** " +
+//            userDetails.getPassword() + " **** " +
+//            userDetails.getAuthorities() + " from security " +
+//            SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+//
+//    return jwtProvider.generateToken(authenticate);
+//}
+
+
+
+//	public Optional<org.springframework.security.core.userdetails.User> getCurrentUser() { // I will import user like this cz , we have already user entity imported .. that make confilct between them . 
+//    org.springframework.security.core.userdetails.User principal = (org.springframework.security.core.userdetails.User) SecurityContextHolder.
+//            getContext().getAuthentication().getPrincipal();
+//	return Optional.of(principal) ; //principal.getUsername();
+//}
+//
+//	public String getCurrentUserUsername() {
+//	    org.springframework.security.core.userdetails.User principal = (org.springframework.security.core.userdetails.User) SecurityContextHolder
+//	            .getContext().getAuthentication().getPrincipal();
+//	      System.out.println("from auth Service ******************************************************* " +principal.getUsername( ) );
+//
+//	    return principal.getUsername();
+//	}
 
 
 

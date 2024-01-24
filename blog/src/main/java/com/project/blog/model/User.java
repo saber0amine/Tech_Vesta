@@ -1,6 +1,7 @@
 package com.project.blog.model;
 
-import org.hibernate.mapping.List;
+import java.util.ArrayList;
+import java.util.List;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -13,9 +14,9 @@ public class User {
 
 @Id 
 @GeneratedValue(strategy = GenerationType.IDENTITY)
-private int id ; 
+private Long id ; 
 
-@Column
+@Column(unique=true)
 @NotBlank(message = "username cannot be blank")
 private String userName ; 
 
@@ -28,9 +29,8 @@ private String password ;
 private String email ; 
 
 
-@ManyToOne(targetEntity = Post.class, fetch = FetchType.LAZY   )
-@JoinColumn(name ="post_user_id")
-private java.util.List<Post> post  ; 
+@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true,mappedBy = "user" ,fetch = FetchType.LAZY   )
+private List<Post> post  = new ArrayList<>() ; 
 
 
 	

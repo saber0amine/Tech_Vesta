@@ -24,8 +24,9 @@ import com.project.blog.model.User;
 public class Post {
 
 @Id
-@GeneratedValue ( strategy = GenerationType.IDENTITY)
-private Long id ;
+@GeneratedValue(strategy = GenerationType.IDENTITY)
+private Long id;
+
 
 @Column
 private String title;

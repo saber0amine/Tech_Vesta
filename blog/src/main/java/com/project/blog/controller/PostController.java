@@ -28,8 +28,9 @@ public class PostController {
     	
     }
     @PostMapping("/creatPost")
-    public String createPost(@ModelAttribute("post") Post post) {
+    public String createPost(@ModelAttribute("post") Post post , Model model) {
         postService.createPost(post);
+        model.addAttribute("postCreated" , post);
         return "addPost" ; 
     }
 

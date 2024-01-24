@@ -75,23 +75,35 @@ public String contactPage(Model model) {
 
 
 @PostMapping("/saveUser")
-public String saveUser(Model model , @ModelAttribute("user") User user , BindingResult bindingResult) {
-	
-	if (bindingResult.hasErrors()) {
+public String saveUser(Model model, @ModelAttribute("user") User user, BindingResult bindingResult) {
+    if (bindingResult.hasErrors()) {
         System.out.println("Binding errors: " + bindingResult.getAllErrors());
-        return "register"; 
-        }
+        return "register";
+    }
+
     try {
-        User userExist = userRepository.findByEmail(user.getEmail() ).orElseThrow(() -> new UserNotFoundExecption("⛔ You're already registred !! just login " ));
-        model.addAttribute("error", "⛔ You're already registered!! Just login.");
+        User userExistByEmail = userRepository.findByEmail(user.getEmail()).orElse(null);
+        if (userExistByEmail != null) {
+            model.addAttribute("error", "⛔ Email is already registered! Please use a different email.");
+            return "register";
+        }
+
+        User userExistByUsername = userRepository.findByUserName(user.getUserName()).orElse(null);
+        if (userExistByUsername != null) {
+            model.addAttribute("error", "⛔ Username is already registered! Please choose another username.");
+            return "register";
+        }
+
+        // If both email and username are unique, proceed with user registration
+        authService.signup(user);
         return "login";
+
     } catch (UserNotFoundExecption e) {
-    	authService.signup(user) ; 
-    	
-    	return "login" ;
-     }
-	
+        model.addAttribute("error", "An error occurred during user registration.");
+        return "register";
+    }
 }
+
 
 	
 	 @PostMapping("/login")

@@ -3,13 +3,15 @@ package com.project.blog.service;
 import java.time.Instant;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 
 import com.project.blog.dto.PostDto;
 import com.project.blog.exception.PostNotFoundException;
 import com.project.blog.model.Post;
+import com.project.blog.model.User;
 import com.project.blog.repository.PostRepository;
+import com.project.blog.repository.UserRepository;
+
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -18,8 +20,12 @@ public class PostService {
 	
 	@Autowired
 	 private AuthService authService ; 
-	
+	@Autowired
 	private PostRepository postRepository ; 
+	
+	@Autowired
+	private UserRepository userRepository ; 
+	
 
 	 @Autowired
 	 public void PostService (PostRepository postRepository) { //injection par constructeur 
@@ -35,7 +41,13 @@ public class PostService {
 		post.setCreatedOn(Instant.now());
 		post.setUsername(currentUsername);
 		post.setUpdatedOn(Instant.now());
-				
+		User user =userRepository.findByUserName(currentUsername).orElse(null) ;
+		if(user !=null) {
+			post.setUser(user);	
+			user.getPost().add(post); 
+			
+			}
+	    
       postRepository.save(post);
        
 	}
