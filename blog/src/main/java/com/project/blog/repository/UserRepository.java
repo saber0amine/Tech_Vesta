@@ -11,5 +11,7 @@ import com.project.blog.model.User;
 public interface UserRepository extends JpaRepository<User, Long>{
 
 	Optional<User> findByUserName(String userName) ;
+	Optional<User> findByEmail(String email) ; 
+	Optional<User> findByEmailAndPassword(String email , String passsword ) ;
 
 }

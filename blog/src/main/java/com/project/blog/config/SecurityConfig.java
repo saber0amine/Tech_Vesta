@@ -34,10 +34,10 @@ public class SecurityConfig   {
 	        http.csrf().disable()
 	            .authorizeRequests(authorizeRequests ->
 	                authorizeRequests
-	                    .requestMatchers("/api/auth/**").permitAll()
+	                    .requestMatchers("/api/auth/**" , "/**" , "/css/**", "/js/**", "/images/**").permitAll()
 	                    .anyRequest().authenticated()
 	            );
-	        http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
+//	        http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
 
 	        return http.build();
 	    }

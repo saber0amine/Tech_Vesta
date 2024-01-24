@@ -30,26 +30,37 @@ private AuthenticationManager authenticationManager ;
 @Autowired
 private JwtProvider jwtProvider ; 
 
-	   public void signup(RegisterRequest registerRequest) {
-	        User user = new User();
-	        user.setUserName(registerRequest.getUsername());
-	        user.setEmail(registerRequest.getEmail());
-	        user.setPassword(encodePassword(registerRequest.getPassword() )  );
+//	   public void signup(RegisterRequest registerRequest) {
+//	        User user = new User();
+//	        user.setUserName(registerRequest.getUsername());
+//	        user.setEmail(registerRequest.getEmail());
+//	        user.setPassword(encodePassword(registerRequest.getPassword() )  );
+//	    	System.out.println("from service username ***********************************************" + user.getUserName());
+//	    	System.out.println("email ***********************************************" + registerRequest.getEmail());
+//	    	System.out.println("password ***********************************************" + encodePassword(registerRequest.getPassword() ));
+//
+//	        userRepository.save(user);
+//	    } 
+//	   
+	   
+public void signup(User user ) {
+	    
 
+ userRepository.save(user);
+} 
 
-	        userRepository.save(user);
-	    } 
+	    private String encodePassword(String password) {
+	        if (password != null) {
+	            return passwordEncoder.encode(password);
+	        } else {
+	            throw new IllegalArgumentException("Password cannot be null");
+	        }
+	    }
 	   
-	   
-	   private String encodePassword(String password) {
-		   return passwordEncoder.encode(password) ; 
-	   } 
-	   
-	    public String login(LoginRequest loginRequest) {
-	        Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUserName(),
-	                loginRequest.getPassword()));
+	    public String login(User user) {
+	        Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getUserName(),
+	                user.getPassword()));
 	        SecurityContextHolder.getContext().setAuthentication(authenticate);
-System.out.println("**********************************from service *************************************** " );
 	        return  jwtProvider.generateToken(authenticate); 
 	        }
 
