@@ -101,6 +101,33 @@ return "profil";
     }
 
     
+    @GetMapping("/blogPage")
+    public String blogPage() {
+    	return "blogPage" ;
+    }
+    
+    
+    @GetMapping("/allPosts")
+    public String allPosts(Model model) {
+    	List<Post> allPosts = postRepository.findAll();    	
+    	model.addAttribute("allPost", allPosts) ;
+    	
+    	return "allPosts"; 
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
    

@@ -41,6 +41,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/profilPage">Profile</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/profilPage">Back</a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -50,51 +53,54 @@
         <!-- Page Content -->
         <div id="content" class="p-4">
             <div class="row">
+                <!-- User Info Section -->
                 <div class="col-md-4">
                     <div class="card mb-4">
-                        <div class="card-body">
+                        <div class="card-body text-center">
                             <h5 class="card-title">Welcome, <span th:if="${authentication != null}"
                                     th:text="${authentication.principal.username}"></span>!</h5>
-                            <img th:src="@{'/profile-picture/' + ${user.id}}" class="img-fluid rounded-circle"
+                            <img th:src="@{'/profile-picture/' + ${user.id}}" class="img-fluid rounded-circle profile-picture"
                                 alt="Profile Picture" />
                         </div>
                     </div>
 
-                    <!-- Inside your profile page template -->
+                    <!-- Change Profile Picture Section -->
                     <div class="card mb-4">
-                        <div class="card-body">
-                            <h5 class="card-title">Profile Picture</h5>
-                            <!-- Add image display logic here -->
-                            <img th:src="${user.profilePicture}" class="img-fluid rounded-circle"
-                                alt="Profile Picture">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Change Profile Picture</h5>
                             <form th:action="@{/uploadProfilePicture}" method="post" enctype="multipart/form-data">
-                                <input type="file" name="file" accept="image/*">
-                                <button type="submit" class="btn btn-primary">Upload Picture</button>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="customFile" name="file" accept="image/*">
+                                    <label class="custom-file-label" for="customFile">Choose file</label>
+                                </div>
+                                <button type="submit" class="btn btn-primary mt-2">Upload Picture</button>
                             </form>
                         </div>
                     </div>
 
                     <!-- Bio Section -->
                     <div class="card mb-4">
-                        <div class="card-body">
+                        <div class="card-body text-center">
                             <h5 class="card-title">Bio</h5>
-                            <p class="card-text" th:text="${user.bio}">This is where you can write a brief bio about
+                            <p class="card-text" th:text="${user.bio}" id="bioText">This is where you can write a brief bio about
                                 yourself. Tell others about your interests and expertise.</p>
-                            <button id="editBioBtn" class="btn btn-primary" onclick="toggleEdit()">Edit Bio</button>
+                            <button id="editBioBtn" class="btn btn-success" onclick="toggleEdit()">Edit Bio</button>
 
                             <!-- Bio Edit Form -->
                             <form th:action="@{/editBio}" th:object="${user}" method="post" id="bioForm"
                                 style="display: none;">
-                                <textarea th:field="*{bio}" class="form-control"></textarea>
-                                <button type="submit" class="btn btn-success">Save Bio</button>
+                                <div class="form-group">
+                                    <textarea th:field="*{bio}" class="form-control" rows="4"></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Save Bio</button>
                                 <button type="button" class="btn btn-secondary" onclick="toggleEdit()">Cancel</button>
                             </form>
                         </div>
                     </div>
 
-                    <!-- Add Account Section -->
+                    <!-- Account Section -->
                     <div class="card">
-                        <div class="card-body">
+                        <div class="card-body text-center">
                             <h5 class="card-title">Account</h5>
                             <!-- Add account information or settings -->
                             <a href="#" class="btn btn-primary">Account Settings</a>
@@ -106,27 +112,26 @@
                 <div class="col-md-8">
                     <h2 class="mb-4">Your Posts</h2>
 
-       <!-- Iterate through user posts and display post cards -->
-<div th:each="post : ${userPosts}">
-    <div class="card mb-4">
-        <div class="card-body">
-            <!-- Display a smaller profile picture -->
-            <img th:if="${post.authorImage != null and post.authorImage.length > 0}" 
-                 th:src="@{'/post-images/' + ${post.id}}" alt="Author Image" class="img-thumbnail" style="max-width: 400px; max-height: 200px;"/>
-            
-            <h5 class="card-title" th:text="${post.title}"></h5>
-            
-            <p th:utext="${#strings.length(post.content) > 100 ? post.content.substring(0, 100) + '...' : post.content}"></p>
-            
-            <p th:text="${#temporals.format(post.createdOn, 'dd-MM-yyyy HH:mm:ss')}"></p>
-            
-            <a th:href="@{'/viewPost/' + ${post.id}}" class="btn btn-primary">Read More</a>
-        </div>
-    </div>
-</div>
-
+                    <!-- Iterate through user posts and display post cards -->
+                    <div th:each="post : ${userPosts}">
+                        <div class="card mb-4">
+                            <div class="card-body">
+                                <!-- Display a smaller profile picture -->
+                                <img th:if="${post.authorImage != null and post.authorImage.length > 0}" 
+                                    th:src="@{'/post-images/' + ${post.id}}" alt="Author Image" class="img-thumbnail" />
+                                
+                                <h5 class="card-title" th:text="${post.title}"></h5>
+                                
+<!--                                 <p class="card-text" th:utext="${#strings.length(post.content) > 100 ? post.content.substring(0, 100) + '...' : post.content}"></p> -->
+<div class="card-text" th:utext="${post.content != null ? (#strings.length(post.content) > 100 ? post.content.substring(0, 50) + '...' : post.content) : ''}"></div>
+                                
+                                <p class="card-text" th:text="${#temporals.format(post.createdOn, 'dd-MM-yyyy HH:mm:ss')}"></p>
+                                
+                                <a th:href="@{'/viewPost/' + ${post.id}}" class="btn btn-primary">Read More</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-
             </div>
         </div>
     </div>
