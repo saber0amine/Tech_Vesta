@@ -70,6 +70,10 @@ public void setAuthorImage(MultipartFile file) {
     }
 }
 
+public byte[] getAuthorImage() {
+    return authorImage;
+}
+
 	
 	
 }

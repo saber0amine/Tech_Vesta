@@ -1,5 +1,6 @@
 package com.project.blog.controller;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -11,12 +12,15 @@ import org.springframework.web.multipart.MultipartFile;
 import com.project.blog.dto.PostDto;
 import com.project.blog.model.Post;
 import com.project.blog.model.User;
+import com.project.blog.repository.PostRepository;
 import com.project.blog.repository.UserRepository;
 import com.project.blog.service.PostService;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 
 @Controller
 //@RequestMapping("/api/posts/")
@@ -26,6 +30,9 @@ public class PostController {
     private PostService postService;
     @Autowired
     private UserRepository userRepository  ;
+    
+    @Autowired
+    private PostRepository postRepository ; 
     
     @GetMapping("/CreationPostPage")
     public String CreationPostPage(Model model) {
@@ -46,21 +53,57 @@ public class PostController {
         return "addPost";
     }
 
- 
+    @GetMapping("/viewPost/{postId}")
+    public String viewPost(@PathVariable Long postId, Model model) {
+        Optional<Post> optionalPost = postRepository.findById(postId);
 
+        if (optionalPost.isPresent()) {
+            Post post = optionalPost.get();
+            model.addAttribute("post", post);
+        } else {
+return "profil";       
+}
 
-    
-    
-    
-    @GetMapping("/all")
-    public ResponseEntity<List<PostDto>> showAllPosts() {
-        return new ResponseEntity<>(postService.showAllPosts(), HttpStatus.OK);
+        // Return the viewPost template
+        return "viewPost";
     }
 
-    @GetMapping("/get/{id}")
-    public ResponseEntity<PostDto> getSinglePost(@PathVariable @RequestBody Long id) {
-        return new ResponseEntity<>(postService.readSinglePost(id), HttpStatus.OK);
+    
+    @RestController
+    @RequestMapping("/post-images")
+    public class PostImageController {
+
+        @Autowired
+        private PostRepository postRepository;
+
+        @GetMapping("/{postId}")
+        public ResponseEntity<ByteArrayResource> servePostImage(@PathVariable Long postId) throws IOException {
+            Optional<Post> postOptional = postRepository.findById(postId);
+
+            if (postOptional.isPresent()) {
+                Post post = postOptional.get();
+
+                byte[] authorImage = post.getAuthorImage();
+
+                if (authorImage != null) {
+                    ByteArrayResource resource = new ByteArrayResource(authorImage);
+
+                    return ResponseEntity.ok()
+                            .header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=author-image.jpg")
+                            .contentType(MediaType.IMAGE_JPEG)
+                            .contentLength(authorImage.length)
+                            .body(resource);
+                }
+            }
+
+            return ResponseEntity.notFound().build();
+        }
     }
+
+    
+    
+    
+   
 
 	}
 

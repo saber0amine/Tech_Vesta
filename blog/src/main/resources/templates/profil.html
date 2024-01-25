@@ -55,50 +55,42 @@
                         <div class="card-body">
                             <h5 class="card-title">Welcome, <span th:if="${authentication != null}"
                                     th:text="${authentication.principal.username}"></span>!</h5>
-                                       <img th:src="@{'/profile-picture/' + ${user.id}}" class="img-fluid rounded-circle" alt="Profile Picture" />
-                           
+                            <img th:src="@{'/profile-picture/' + ${user.id}}" class="img-fluid rounded-circle"
+                                alt="Profile Picture" />
                         </div>
                     </div>
-                    
-                    
+
                     <!-- Inside your profile page template -->
-<div class="card mb-4">
-    <div class="card-body">
-        <h5 class="card-title">Profile Picture</h5>
-<!--         <img th:src="${user.profilePicture}" class="img-fluid rounded-circle" alt="Profile Picture"> -->
-        <form th:action="@{/uploadProfilePicture}" method="post" enctype="multipart/form-data">
-            <input type="file" name="file" accept="image/*">
-            <button type="submit" class="btn btn-primary">Upload Picture</button>
-        </form>
-    </div>
-</div>
-                    
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title">Profile Picture</h5>
+                            <!-- Add image display logic here -->
+                            <img th:src="${user.profilePicture}" class="img-fluid rounded-circle"
+                                alt="Profile Picture">
+                            <form th:action="@{/uploadProfilePicture}" method="post" enctype="multipart/form-data">
+                                <input type="file" name="file" accept="image/*">
+                                <button type="submit" class="btn btn-primary">Upload Picture</button>
+                            </form>
+                        </div>
+                    </div>
 
-                  
-<!-- Add Bio Section -->
-<div class="card mb-4">
-    <div class="card-body">
-        <h5 class="card-title">Bio</h5>
-        <p class="card-text" th:text="${user.bio}">This is where you can write a brief bio about yourself. Tell others about your interests and expertise.</p>
-        <button id="editBioBtn" class="btn btn-primary" onclick="toggleEdit()">Edit Bio</button>
+                    <!-- Bio Section -->
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title">Bio</h5>
+                            <p class="card-text" th:text="${user.bio}">This is where you can write a brief bio about
+                                yourself. Tell others about your interests and expertise.</p>
+                            <button id="editBioBtn" class="btn btn-primary" onclick="toggleEdit()">Edit Bio</button>
 
-        <!-- Bio Edit Form -->
-        <form th:action="@{/editBio}" th:object="${user}" method="post" id="bioForm" style="display: none;">
-            <textarea th:field="*{bio}" class="form-control"></textarea>
-            <button type="submit" class="btn btn-success">Save Bio</button>
-            <button type="button" class="btn btn-secondary" onclick="toggleEdit()">Cancel</button>
-        </form>
-    </div>
-</div>
-
-                  
-                    
-                    
-                    
-                    
-                    
-                    
-                    
+                            <!-- Bio Edit Form -->
+                            <form th:action="@{/editBio}" th:object="${user}" method="post" id="bioForm"
+                                style="display: none;">
+                                <textarea th:field="*{bio}" class="form-control"></textarea>
+                                <button type="submit" class="btn btn-success">Save Bio</button>
+                                <button type="button" class="btn btn-secondary" onclick="toggleEdit()">Cancel</button>
+                            </form>
+                        </div>
+                    </div>
 
                     <!-- Add Account Section -->
                     <div class="card">
@@ -110,26 +102,31 @@
                     </div>
                 </div>
 
-              
-              <!-- User Posts Section -->
-<div class="col-md-8">
-    <h2 class="mb-4">Your Posts</h2>
+                <!-- User Posts Section -->
+                <div class="col-md-8">
+                    <h2 class="mb-4">Your Posts</h2>
 
-    <!-- Iterate through user posts and display post cards -->
-    <div th:each="post : ${userPosts}">
-        <div class="card mb-4">
-            <div class="card-body">
-                <h5 class="card-title" th:text="${post.title}"></h5>
-                <p class="card-text" th:text="${post.content}"></p>
-                <a href="#" class="btn btn-primary">Read More</a>
-            </div>
+       <!-- Iterate through user posts and display post cards -->
+<div th:each="post : ${userPosts}">
+    <div class="card mb-4">
+        <div class="card-body">
+            <!-- Display a smaller profile picture -->
+            <img th:if="${post.authorImage != null and post.authorImage.length > 0}" 
+                 th:src="@{'/post-images/' + ${post.id}}" alt="Author Image" class="img-thumbnail" style="max-width: 400px; max-height: 200px;"/>
+            
+            <h5 class="card-title" th:text="${post.title}"></h5>
+            
+            <p th:utext="${#strings.length(post.content) > 100 ? post.content.substring(0, 100) + '...' : post.content}"></p>
+            
+            <p th:text="${#temporals.format(post.createdOn, 'dd-MM-yyyy HH:mm:ss')}"></p>
+            
+            <a th:href="@{'/viewPost/' + ${post.id}}" class="btn btn-primary">Read More</a>
         </div>
     </div>
 </div>
-              
-              
-              
-              
+
+                </div>
+
             </div>
         </div>
     </div>
@@ -142,41 +139,21 @@
     <!-- Your custom script -->
     <script th:src="@{/js/main.js}"></script>
     <!-- JavaScript to toggle between view and edit modes -->
-<script th:inline="javascript">
-    function toggleEdit() {
-        var bioSection = document.getElementById('editBioBtn');
-        var bioForm = document.getElementById('bioForm');
-        var bioText = document.getElementById('bioText');
+    <script th:inline="javascript">
+        function toggleEdit() {
+            var bioSection = document.getElementById('editBioBtn');
+            var bioForm = document.getElementById('bioForm');
+            var bioText = document.getElementById('bioText');
 
-        if (bioSection.style.display === 'none') {
-            bioSection.style.display = 'block';
-            bioForm.style.display = 'none';
-        } else {
-            bioSection.style.display = 'none';
-            bioForm.style.display = 'block';
+            if (bioSection.style.display === 'none') {
+                bioSection.style.display = 'block';
+                bioForm.style.display = 'none';
+            } else {
+                bioSection.style.display = 'none';
+                bioForm.style.display = 'block';
+            }
         }
-    }
-</script>
+    </script>
 </body>
 
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
