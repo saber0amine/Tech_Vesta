@@ -10,9 +10,11 @@ import org.springframework.web.bind.annotation.*;
 import com.project.blog.dto.PostDto;
 import com.project.blog.model.Post;
 import com.project.blog.model.User;
+import com.project.blog.repository.UserRepository;
 import com.project.blog.service.PostService;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 //@RequestMapping("/api/posts/")
@@ -20,6 +22,8 @@ public class PostController {
 	
     @Autowired
     private PostService postService;
+    @Autowired
+    private UserRepository userRepository  ;
     
     @GetMapping("/CreationPostPage")
     public String CreationPostPage(Model model) {
@@ -35,15 +39,10 @@ public class PostController {
         return "addPost" ; 
     }
     
-        	@GetMapping("/profilPage")
-    	public String profilPage(Authentication authentication, Model model) {
-        		System.out.println("auth *****************************" +authentication);
-    	    if (authentication != null) {
-    	        model.addAttribute("authentication", authentication);
-    	    }
-    	    return "profil";
-    	}
-    	
+
+    
+    
+    
     @GetMapping("/all")
     public ResponseEntity<List<PostDto>> showAllPosts() {
         return new ResponseEntity<>(postService.showAllPosts(), HttpStatus.OK);

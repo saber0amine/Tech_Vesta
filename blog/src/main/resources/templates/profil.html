@@ -6,75 +6,177 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
 
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <!-- Materialize CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-
     <!-- Your custom styles -->
-    <link th:href="@{/css/styles.css}" rel="stylesheet" />
+    <link th:href="@{/css/profil.css}" rel="stylesheet" />
 </head>
 
 <body>
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
-        <div class="container px-4 px-lg-5">
-            <a class="navbar-brand" style="color: black;" href="index.html">IT blog</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand" href="/">IT blog</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
                 aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                Menu
-                <i class="fas fa-bars"></i>
+                <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav ms-auto py-4 py-lg-0">
-                    <!-- Add your other navigation links here -->
-                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" style="color: black;" href="index.html">Home</a></li>
-                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" style="color: black;" href="/CreationPostPage">Add Your Post</a></li>
-                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" style="color: black;" href="/profilPage">Profile</a></li>
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/">Home
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/CreationPostPage">Add Your Post</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/profilPage">Profile</a>
+                    </li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <div class="container d-md-flex align-items-stretch">
+    <div class="container mt-5">
         <!-- Page Content -->
-        <div id="content" class="p-4 p-md-5 pt-5">
-            <h2 class="mb-4"><span th:if="${authentication != null}" th:text="${authentication.principal.username}"> </span> Profile</h2>
-            <div class="card">
-                <div class="card-content">
-                    <span class="card-title">Welcome, <span th:if="${authentication != null}" th:text="${authentication.principal.username}"></span>
-</span>
-!</span>
-                    <p>Email: <span th:if="${#authentication != null}" th:text="${#authentication.principal.email}"></span>
-</span>
-</span></p>
-<div th:if="${#authentication != null}">
-    <p th:text="${#authentication.principal.username}"></p>
-    <p th:text="${#authentication.principal.email}"></p>
+        <div id="content" class="p-4">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title">Welcome, <span th:if="${authentication != null}"
+                                    th:text="${authentication.principal.username}"></span>!</h5>
+                                       <img th:src="@{'/profile-picture/' + ${user.id}}" class="img-fluid rounded-circle" alt="Profile Picture" />
+                           
+                        </div>
+                    </div>
+                    
+                    
+                    <!-- Inside your profile page template -->
+<div class="card mb-4">
+    <div class="card-body">
+        <h5 class="card-title">Profile Picture</h5>
+<!--         <img th:src="${user.profilePicture}" class="img-fluid rounded-circle" alt="Profile Picture"> -->
+        <form th:action="@{/uploadProfilePicture}" method="post" enctype="multipart/form-data">
+            <input type="file" name="file" accept="image/*">
+            <button type="submit" class="btn btn-primary">Upload Picture</button>
+        </form>
+    </div>
 </div>
+                    
+
+                  
+<!-- Add Bio Section -->
+<div class="card mb-4">
+    <div class="card-body">
+        <h5 class="card-title">Bio</h5>
+        <p class="card-text" th:text="${user.bio}">This is where you can write a brief bio about yourself. Tell others about your interests and expertise.</p>
+        <button id="editBioBtn" class="btn btn-primary" onclick="toggleEdit()">Edit Bio</button>
+
+        <!-- Bio Edit Form -->
+        <form th:action="@{/editBio}" th:object="${user}" method="post" id="bioForm" style="display: none;">
+            <textarea th:field="*{bio}" class="form-control"></textarea>
+            <button type="submit" class="btn btn-success">Save Bio</button>
+            <button type="button" class="btn btn-secondary" onclick="toggleEdit()">Cancel</button>
+        </form>
+    </div>
+</div>
+
+                  
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+
+                    <!-- Add Account Section -->
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Account</h5>
+                            <!-- Add account information or settings -->
+                            <a href="#" class="btn btn-primary">Account Settings</a>
+                        </div>
+                    </div>
                 </div>
+
+              
+              <!-- User Posts Section -->
+<div class="col-md-8">
+    <h2 class="mb-4">Your Posts</h2>
+
+    <!-- Iterate through user posts and display post cards -->
+    <div th:each="post : ${userPosts}">
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title" th:text="${post.title}"></h5>
+                <p class="card-text" th:text="${post.content}"></p>
+                <a href="#" class="btn btn-primary">Read More</a>
+            </div>
+        </div>
+    </div>
+</div>
+              
+              
+              
+              
             </div>
         </div>
     </div>
 
-    <!-- Materialize JavaScript -->
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-
-    <!-- Initialize Materialize components -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // Initialize Materialize components
-            M.AutoInit();
-        });
-    </script>
+    <!-- Bootstrap JS and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
     <!-- Your custom script -->
     <script th:src="@{/js/main.js}"></script>
+    <!-- JavaScript to toggle between view and edit modes -->
+<script th:inline="javascript">
+    function toggleEdit() {
+        var bioSection = document.getElementById('editBioBtn');
+        var bioForm = document.getElementById('bioForm');
+        var bioText = document.getElementById('bioText');
+
+        if (bioSection.style.display === 'none') {
+            bioSection.style.display = 'block';
+            bioForm.style.display = 'none';
+        } else {
+            bioSection.style.display = 'none';
+            bioForm.style.display = 'block';
+        }
+    }
+</script>
 </body>
 
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

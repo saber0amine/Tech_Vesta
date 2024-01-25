@@ -4,6 +4,7 @@ import java.time.Instant;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.project.blog.dto.PostDto;
 import com.project.blog.exception.PostNotFoundException;
@@ -34,10 +35,10 @@ public class PostService {
 	
 		
 	 }
+	 @Transactional
 	public void createPost(Post post) {
 	    String currentUsername = authService.getCurrentUserUsername();
       System.out.println("from post Service *******************************************************" +currentUsername);
-//		Optional<User> currentUser = authService.getCurrentUser(); /*.orElseThrow(() -> new IllegalArgumentException("no user logged ")) ;  it will return the username */
 		post.setCreatedOn(Instant.now());
 		post.setUsername(currentUsername);
 		post.setUpdatedOn(Instant.now());

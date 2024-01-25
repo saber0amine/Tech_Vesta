@@ -6,6 +6,7 @@ import java.util.List;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
+import com.project.blog.model.Post;
 
 @Data
 @Entity
@@ -28,12 +29,34 @@ private String password ;
 @NotBlank(message = "email cannot be blank")
 private String email ; 
 
+@OneToMany
+private List<Post> post = new ArrayList<>();
 
-@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true,mappedBy = "user" ,fetch = FetchType.LAZY   )
-private List<Post> post  = new ArrayList<>() ; 
+private String bio ; 
+
+@Lob
+@Column(name = "profilePicture", columnDefinition="MEDIUMBLOB")
+private byte[] profilePicture;
+
+
 
 
 	
 	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
