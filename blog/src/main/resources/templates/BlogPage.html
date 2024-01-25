@@ -9,6 +9,12 @@
 		
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <link th:href="@{/css/styles.css}" rel="stylesheet" />
+        <!-- Materialize CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+<!-- Materialize JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+        
   </head>
   <body>
 		  <!-- Navigation-->
@@ -25,6 +31,17 @@
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4"  style="color: black;" th:href="@{/aboutPage}">About</a></li>
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4"  style="color: black;" th:href="@{/CreationPostPage}">Add Your Post</a></li>
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" style="color: black;"  th:href="@{/contactPage}" >Contact</a></li>
+ 						 <li>		 
+             <li>
+                                   <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" style="color: black;"  th:href="@{/profilPage}" >Profil</a></li>
+
+        </li>
+        
+
+        
+        
+        
+                        
                     </ul>
                 </div>
             </div>
@@ -107,6 +124,27 @@
             </div>
         </div>
     </nav>
+    
+  
+  
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var openSidebarButton = document.getElementById('openSidebar');
+        var sidebar = document.getElementById('sidebar');
+
+        openSidebarButton.addEventListener('click', function () {
+            sidebar.style.display = 'block';
+        });
+
+        document.addEventListener('click', function (event) {
+            if (event.target.id !== 'openSidebar' && !sidebar.contains(event.target)) {
+                sidebar.style.display = 'none';
+            }
+        });
+    });
+</script>
+  
     
 
     <script src="/js/jquery.min.js"></script>

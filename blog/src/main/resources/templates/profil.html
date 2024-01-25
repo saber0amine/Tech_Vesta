@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>User Profile</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- Materialize CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- Your custom styles -->
+    <link th:href="@{/css/styles.css}" rel="stylesheet" />
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
+        <div class="container px-4 px-lg-5">
+            <a class="navbar-brand" style="color: black;" href="index.html">IT blog</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                Menu
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ms-auto py-4 py-lg-0">
+                    <!-- Add your other navigation links here -->
+                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" style="color: black;" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" style="color: black;" href="/CreationPostPage">Add Your Post</a></li>
+                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" style="color: black;" href="/profilPage">Profile</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container d-md-flex align-items-stretch">
+        <!-- Page Content -->
+        <div id="content" class="p-4 p-md-5 pt-5">
+            <h2 class="mb-4"><span th:if="${authentication != null}" th:text="${authentication.principal.username}"> </span> Profile</h2>
+            <div class="card">
+                <div class="card-content">
+                    <span class="card-title">Welcome, <span th:if="${authentication != null}" th:text="${authentication.principal.username}"></span>
+</span>
+!</span>
+                    <p>Email: <span th:if="${#authentication != null}" th:text="${#authentication.principal.email}"></span>
+</span>
+</span></p>
+<div th:if="${#authentication != null}">
+    <p th:text="${#authentication.principal.username}"></p>
+    <p th:text="${#authentication.principal.email}"></p>
+</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Materialize JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+    <!-- Initialize Materialize components -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Initialize Materialize components
+            M.AutoInit();
+        });
+    </script>
+
+    <!-- Your custom script -->
+    <script th:src="@{/js/main.js}"></script>
+</body>
+
+</html>

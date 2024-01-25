@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -111,13 +112,14 @@ public String saveUser(Model model, @ModelAttribute("user") User user, BindingRe
 
 	
 	 @PostMapping("/login")
-	 public String login(@ModelAttribute("user") User user, Model model , HttpServletResponse response ) {
+	 public String login(@ModelAttribute("user") User user, Model model , HttpServletResponse response , Authentication authentication) {
 	     try {
 	         User userExist = userRepository.findByEmail(user.getEmail())
 	                 .orElseThrow(() -> new UserNotFoundExecption("we are sorry !! but can you try again  " ));
 
 	         user.setUserName(userExist.getUserName());
     		 authService.login(user , response) ;
+    	     model.addAttribute("authentication", authentication);
 	         return "BlogPage";
 	     } catch (UserNotFoundExecption e) {
 	         model.addAttribute("error", e.getMessage());
