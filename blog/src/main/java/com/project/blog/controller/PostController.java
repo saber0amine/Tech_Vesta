@@ -6,6 +6,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.project.blog.dto.PostDto;
 import com.project.blog.model.Post;
@@ -13,6 +14,7 @@ import com.project.blog.model.User;
 import com.project.blog.repository.UserRepository;
 import com.project.blog.service.PostService;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,13 +34,20 @@ public class PostController {
     	return "addPost" ;
     	
     }
-    @PostMapping("/creatPost")
-    public String createPost(@ModelAttribute("post") Post post , Model model) {
-        postService.createPost(post);
-        model.addAttribute("postCreated" , post);
-        return "addPost" ; 
+
+    @PostMapping("/createPost")
+    public String createPost(@ModelAttribute("post") Post post,
+                             @RequestParam("authorImage") MultipartFile authorImage,
+                             Model model) throws IOException {
+    	 
+
+        postService.createPost(post , authorImage);
+        model.addAttribute("postCreated", post);
+        return "addPost";
     }
-    
+
+ 
+
 
     
     

@@ -82,7 +82,7 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <form th:action="@{creatPost}" method="post" th:object="${post}">
+<form th:action="@{/createPost}" method="post" th:object="${post}" enctype="multipart/form-data">
                     <h2>Add a New Post</h2>
                     <div class="form-group">
                         <label for="postTitle">Post Title</label>
@@ -92,12 +92,12 @@
                         <label for="postContent">Post Content</label>
                         <textarea class="form-control" id="postContent" th:field="*{content}" name="postContent" rows="6" required></textarea>
                     </div>
-                    <div class="form-group">
-                        <label for="authorImage">Your Image (JPG/PNG)</label>
-                        <div class="custom-file">
-                            <input type="file" class="custom-file-input" id="authorImage" name="authorImage" accept=".jpg, .jpeg, .png" >
-                            <label class="custom-file-label" for="authorImage">Choose file</label>
-                        </div>
+                      <div class="form-group">
+        <label for="authorImage">Your Image (JPG/PNG)</label>
+        <div class="custom-file">
+            <input type="file" class="custom-file-input" id="authorImage" name="authorImage" accept=".jpg, .jpeg, .png">
+            <label class="custom-file-label" for="authorImage">Choose file</label>
+        </div>
                     </div>
                     <button type="submit" class="btn btn-primary">Submit Post</button>
                 </form>
@@ -110,3 +110,11 @@
 </body>
 
 </html>
+
+
+
+
+
+
+
+
