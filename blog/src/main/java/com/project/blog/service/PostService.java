@@ -3,6 +3,7 @@ package com.project.blog.service;
 import java.time.Instant;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -82,6 +83,50 @@ public class PostService {
 	  public List<Post> searchPosts(String query) {
 	        return postRepository.findByTitleContainingOrContentContaining(query, query);
 	    }
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+
+	
+	    public Iterable<Post> getAllPosts(String query) {
+	        if (query != null && !query.isEmpty()) {
+	      
+	            return postRepository.findByTitleContainingIgnoreCase(query);
+	        } else {
+	            return postRepository.findAll();
+	        }
+	    }
+
+	    
+	    public Iterable<Post> getAllPostsSorted(String query, Sort sort) {
+	        // Implement the logic to retrieve all posts with sorting
+	        if (query != null && !query.isEmpty()) {
+	            // If there's a query, you might want to implement search logic here
+	            // For simplicity, I'm assuming you have a method in your repository like findByTitleContainingIgnoreCase
+	            return postRepository.findByTitleContainingIgnoreCase(query, sort);
+	        } else {
+	            return postRepository.findAll(sort);
+	        }
+	    }
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
 
 }
 

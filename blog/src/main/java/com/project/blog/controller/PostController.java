@@ -22,6 +22,11 @@ import java.util.Optional;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 
+
+import org.springframework.data.domain.Sort;
+import org.springframework.web.bind.annotation.GetMapping;
+
+
 @Controller
 //@RequestMapping("/api/posts/")
 public class PostController {
@@ -142,6 +147,44 @@ return "profil";
     
     
     
+    @GetMapping("/sortedPosts")
+    public String getAllPosts(Model model,
+            @RequestParam(name = "query", required = false) String query,
+            @RequestParam(name = "sort", required = false) String sort) {
+
+// If sorting option is provided, create a Sort object
+Sort sortObj = null;
+if (sort != null) {
+String[] sortParams = sort.split(",");
+if (sortParams.length == 2) {
+sortObj = Sort.by(Sort.Direction.fromString(sortParams[1]), sortParams[0]);
+}
+}
+
+// Retrieve all posts without pagination
+Iterable<Post> allPosts;
+if (sortObj != null) {
+allPosts = postService.getAllPostsSorted(query, sortObj);
+} else {
+allPosts = postService.getAllPosts(query);
+}
+
+model.addAttribute("allPosts", allPosts);
+return "allPosts";
+}
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+}
+    
     
     
     
@@ -153,7 +196,7 @@ return "profil";
     
    
 
-	}
+	
 
 
 
