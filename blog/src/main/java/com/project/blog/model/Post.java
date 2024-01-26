@@ -37,7 +37,7 @@ private String title;
 
 @Lob
 @NotEmpty
-@Column(columnDefinition = "LONGTEXT") // Adjust the type according to your database
+@Column(columnDefinition = "LONGTEXT") 
 private String content;
 @Column
 private Instant createdOn;

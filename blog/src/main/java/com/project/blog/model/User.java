@@ -7,6 +7,9 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 import com.project.blog.model.Post;
+import com.project.blog.model.Comment;
+import com.project.blog.model.Forum;
+
 
 @Data
 @Entity
@@ -31,6 +34,13 @@ private String email ;
 
 @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
 private List<Post> post = new ArrayList<>();
+
+
+@OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
+private List<Forum> forum = new ArrayList<>();
+
+@OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
+private List<Comment> comment = new ArrayList<>();
 
 private String bio ; 
 

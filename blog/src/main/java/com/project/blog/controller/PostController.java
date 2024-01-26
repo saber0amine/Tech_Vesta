@@ -162,16 +162,7 @@ return "allPosts";
     
     
     
-    @GetMapping("/forum")
-    public String forumPage(Model model) {
-    	return "forum"; 
-    }
-    
-
-    @GetMapping("/askforum")
-    public String askforumPage(Model model) {
-    	return "askforum"; 
-    }
+   
     
     
     
