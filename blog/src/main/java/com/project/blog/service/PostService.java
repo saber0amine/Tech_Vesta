@@ -38,21 +38,7 @@ public class PostService {
 	
 		
 	 }
-		/*
-		 * @Transactional public void createPost(Post post) { String currentUsername =
-		 * authService.getCurrentUserUsername(); System.out.
-		 * println("from post Service *******************************************************"
-		 * +currentUsername); post.setCreatedOn(Instant.now());
-		 * post.setUsername(currentUsername); post.setUpdatedOn(Instant.now()); User
-		 * user =userRepository.findByUserName(currentUsername).orElse(null) ; if(user
-		 * !=null) { post.setUser(user); user.getPost().add(post);
-		 * 
-		 * }
-		 * 
-		 * postRepository.save(post);
-		 * 
-		 * }
-		 */
+	
 	
 	
 	 @Transactional
@@ -65,7 +51,6 @@ public class PostService {
 	         post.setUsername(currentUsername);
 	         post.setUpdatedOn(Instant.now());
 
-	         // Retrieve user from the repository
 	         User user = userRepository.findByUserName(currentUsername).orElse(null);
 
 	         if (user != null) {
@@ -73,15 +58,12 @@ public class PostService {
 	             user.getPost().add(post);
 	         }
 
-	         // If there's an image, handle it
 	         if (authorImage != null && !authorImage.isEmpty()) {
 	             post.setAuthorImage(authorImage);
 	         }
 
-	         // Save the post to the repository
 	         postRepository.save(post);
 	     } catch (IOException e) {
-	         // Handle file processing exception (e.g., log it or throw a custom exception)
 	         throw new RuntimeException("Failed to process file", e);
 	     }
 	 }
@@ -95,40 +77,11 @@ public class PostService {
 	 
 	 
 	 
-	private PostDto mapFromPostToDto(Post post) {
-		 PostDto postDto = new PostDto() ; 
-		 postDto.setId(post.getId());
-		 postDto.setTitle(post.getTitle());
-		 postDto.setContent(post.getContent());
-			
-		 /*String username = authService
-					.getCurrentUser() .orElseThrow(() -> new IllegalArgumentException("no user logged ") ) */ ;
-	       post.setUsername(post.getUsername());
-	       postRepository.save(post) ;
-		
-		return postDto ;
-	}
+	
 
-//	private Post mapFromDtoToPost(PostDto postDto) {
-//		Post post = new Post() ; 
-//		post.setTitle(postDto.getTitle());
-//		post.setContent(postDto.getContent());
-//		String username = authService.getCurrentUser(); /*.orElseThrow(() -> new IllegalArgumentException("no user logged ")) ;  it will return the username */
-//		post.setCreatedOn(Instant.now());
-//		post.setUsername(username);
-//		post.setUpdatedOn(Instant.now());
-//				
-//				return post ; 
-//	}
-	public List<PostDto> showAllPosts() {
-		List<Post> posts = postRepository.findAll();
-		return posts.stream().map(this::mapFromPostToDto).collect(Collectors.toList()); // looping the list of posts with stream (java 8)
-	}
-
-	public PostDto readSinglePost(Long id) {
-		Post post = postRepository.findById(id).orElseThrow(()-> new PostNotFoundException("For id " + id)  )  ; 
-		return mapFromPostToDto(post);
-	}
+	  public List<Post> searchPosts(String query) {
+	        return postRepository.findByTitleContainingOrContentContaining(query, query);
+	    }
 
 }
 

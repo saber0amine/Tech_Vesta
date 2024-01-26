@@ -10832,5 +10832,65 @@ header.masthead .post-heading .meta a {
     font-size: 18px;
     color: #333; /* Adjust text color as needed */
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+/************************************************************************************************/
+
+
+/* styles.css */
+
+/* Adjust card spacing and alignment */
+.card {
+    margin-bottom: 20px;
+}
+
+/* Style the title */
+.card-title {
+    color: #333;
+}
+
+/* Style the user information */
+.card-subtitle {
+    color: #777;
+}
+
+/* Style the content snippet */
+.card-text {
+    color: #555;
+}
+
+/* Style the Read More button */
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+
+/* Add some padding to the profile picture */
+.profile-picture {
+    margin-right: 10px;
+}
+
+/* Center the All Posts heading */
+h2.text-center {
+    color: #333;
+}
+
+
   
 }

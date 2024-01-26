@@ -69,6 +69,22 @@ return "profil";
     }
 
     
+    @GetMapping("/deletePost/{postId}")
+    public String deletePost(@PathVariable Long postId) {
+        Optional<Post> optionalPost = postRepository.findById(postId);
+
+        if (optionalPost.isPresent()) {
+        	postRepository.deleteById(postId);
+            return "profil";       
+
+        	
+        } else {
+     return "profil";       
+}
+
+    }
+
+    
     @RestController
     @RequestMapping("/post-images")
     public class PostImageController {
@@ -110,14 +126,19 @@ return "profil";
     @GetMapping("/allPosts")
     public String allPosts(Model model) {
     	List<Post> allPosts = postRepository.findAll();    	
-    	model.addAttribute("allPost", allPosts) ;
-    	
+    	model.addAttribute("allPosts", allPosts) ;
+    	System.out.println("************************"+allPosts.get(0).getUsername());
     	return "allPosts"; 
     }
     
     
     
-    
+    @GetMapping("/search")
+    public String searchPosts(@RequestParam("query") String query, Model model) {
+        List<Post> allPosts = postService.searchPosts(query);
+        model.addAttribute("allPosts", allPosts);
+        return "allPosts";
+    }
     
     
     

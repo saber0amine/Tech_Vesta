@@ -74,7 +74,16 @@ public byte[] getAuthorImage() {
 }
 
 	
-	
+public String toString() {
+    return "Post{" +
+            "id=" + id +
+            ", title='" + title + '\'' +
+            ", content='" + content + '\'' +
+            ", createdOn=" + createdOn +
+            // Exclude user from toString to avoid circular reference
+            ", user=" + username +
+            '}';
+}
 }
 
 
