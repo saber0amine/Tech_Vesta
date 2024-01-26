@@ -19,6 +19,8 @@ public interface UserRepository extends JpaRepository<User, Long>{
 	Optional<User> findByEmailAndPassword(String email , String passsword ) ;
 	 @Query("SELECT u FROM User u LEFT JOIN FETCH u.post WHERE u.userName = :userName")
 	    Optional<User> findUserWithPostsByUserName(@Param("userName") String userName);
+ 	void deleteByPostId(Long postId);
+
 }
 
 

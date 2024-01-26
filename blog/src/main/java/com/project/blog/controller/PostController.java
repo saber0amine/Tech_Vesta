@@ -74,35 +74,7 @@ return "profil";
     }
 
     
-    @GetMapping("/deletePost/{postId}")
-    public String deletePost(@PathVariable Long postId) {
-        Optional<Post> optionalPost = postRepository.findById(postId);
-
-        if (optionalPost.isPresent()) {
-        	postRepository.deleteById(postId);
-            return "profil";       
-
-        	
-        } else {
-     return "profil";       
-}
-
-    }
-
-    @GetMapping("/editPost/{postId}")
-    public String editPost(@PathVariable Long postId) {
-        Optional<Post> optionalPost = postRepository.findById(postId);
-
-        if (optionalPost.isPresent()) {
-        	postRepository.deleteById(postId);
-            return "profil";       
-
-        	
-        } else {
-     return "profil";       
-}
-
-    }
+   
     
     @RestController
     @RequestMapping("/post-images")
@@ -190,8 +162,16 @@ return "allPosts";
     
     
     
+    @GetMapping("/forum")
+    public String forumPage(Model model) {
+    	return "forum"; 
+    }
     
-    
+
+    @GetMapping("/askforum")
+    public String askforumPage(Model model) {
+    	return "askforum"; 
+    }
     
     
     

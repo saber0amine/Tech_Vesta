@@ -29,7 +29,7 @@ private String password ;
 @NotBlank(message = "email cannot be blank")
 private String email ; 
 
-@OneToMany
+@OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
 private List<Post> post = new ArrayList<>();
 
 private String bio ; 
