@@ -89,6 +89,20 @@ return "profil";
 
     }
 
+    @GetMapping("/editPost/{postId}")
+    public String editPost(@PathVariable Long postId) {
+        Optional<Post> optionalPost = postRepository.findById(postId);
+
+        if (optionalPost.isPresent()) {
+        	postRepository.deleteById(postId);
+            return "profil";       
+
+        	
+        } else {
+     return "profil";       
+}
+
+    }
     
     @RestController
     @RequestMapping("/post-images")
