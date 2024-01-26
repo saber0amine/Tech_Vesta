@@ -10,6 +10,7 @@
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
 <script src="https://cdn.ckeditor.com/ckeditor5/41.0.0/classic/ckeditor.js"></script>
     
+
     <style>
         body {
             background-color: #f8f9fa;
@@ -23,16 +24,16 @@
 
         form {
             background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
         }
 
         h2 {
             font-family: 'Your Chosen Font', sans-serif;
             color: #007bff;
-            font-size: 28px;
-            margin-bottom: 20px;
+            font-size: 32px;
+            margin-bottom: 30px;
         }
 
         label {
@@ -41,48 +42,31 @@
         }
 
         .form-group {
-            margin-bottom: 20px;
-        }
-
-        .btn-primary {
-            background-color: #28a745;
-            border-color: #28a745;
-            color: #fff;
-        }
-
-        .btn-secondary {
-            background-color: #6c757d;
-            border-color: #6c757d;
-            color: #fff;
-        }
-
-        nav {
-            background-color: #f8f9fa;
-            padding: 15px;
-        }
-
-        .navbar-brand, .nav-link {
-            color: #007bff;
-            font-family: 'Your Chosen Font', sans-serif;
-            font-size: 24px;
-        }
-
-        .navbar-toggler {
-            background-color: #007bff;
-        }
-
-        .navbar-toggler-icon {
-            color: #fff;
-        }
-
-        .navbar-nav {
-            font-family: 'Your Chosen Font', sans-serif;
+            margin-bottom: 25px;
         }
 
         .custom-file-label {
             overflow: hidden;
         }
-    </style>
+
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+            font-size: 18px;
+            padding: 12px 25px;
+        }
+
+        .btn-secondary {
+            background-color: #6c757d;
+            border-color: #6c757d;
+            font-size: 18px;
+            padding: 12px 25px;
+        }
+
+        .editor-container {
+            margin-top: 25px;
+        }
+    </style>>
 </head>
 
 <body>
@@ -106,66 +90,69 @@
         </div>
     </nav>
 
-    <!-- Main Content-->
+
+
+
+
+   <!-- Main Content-->
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <form th:action="@{/createPost}" method="post" th:object="${post}" enctype="multipart/form-data">
-                    <h2>Add a New Post</h2>
-                    
-                    
-                   <div class="form-group">
-    <label for="postTitle">Post Title</label>
-    <input type="text" class="form-control" id="postTitle" th:field="*{title}" name="postTitle" required>
-</div>
+                    <h2 class="mb-4"> Add a New Post </h2>
 
-<div class="form-group">
-    <label for="postContent">Post Content</label>
-    <div id="editor"></div>
-    <input type="hidden" id="postContent" name="postContent" th:field="*{content}" required>
-</div>
+                    <div class="form-group">
+                        <label for="postTitle">Post Title</label>
+                        <input type="text" class="form-control" id="postTitle" th:field="*{title}" name="postTitle" required>
+                    </div>
 
-<div class="form-group">
-    <label for="authorImage">Your Image (JPG/PNG)</label>
-    <div class="custom-file">
-        <input type="file" class="custom-file-input" id="authorImage" name="authorImage" accept=".jpg, .jpeg, .png">
-        <label class="custom-file-label" for="authorImage">Choose file</label>
-    </div>
-</div>
+                    <div class="form-group">
+                        <label for="postContent">Post Content</label>
+                        <div class="editor-container">
+                            <div id="editor"></div>
+                        </div>
+                        <input type="hidden" id="postContent" name="postContent" th:field="*{content}" required>
+                    </div>
 
-<button type="submit" class="btn btn-primary">Submit Post</button>
-                   
+                    <div class="form-group">
+                        <label for="authorImage">Your Image (JPG/PNG)</label>
+                        <div class="input-group">
+                            <input type="file" class="custom-file-input" id="authorImage" name="authorImage" accept=".jpg, .jpeg, .png">
+                            <label class="custom-file-label" for="authorImage">Choose file</label>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Submit Post</button>
+                    <a th:href="@{/profilPage}" class="btn btn-secondary">Back to Profile</a>
                 </form>
-                <a th:href="@{/profilPage}" class="btn btn-secondary">Back to Profile</a>
             </div>
         </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-<script>
-    document.addEventListener('DOMContentLoaded', (event) => {
-        ClassicEditor
-            .create(document.querySelector('#editor'), {
-                toolbar: ['heading', '|', 'bold', 'italic', 'underline', 'link', 'bulletedList', 'numberedList', 'blockQuote', 'undo', 'redo'],
-                heading: {
-                    options: [
-                        { model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
-                        { model: 'heading1', view: 'h1', title: 'Heading 1', class: 'ck-heading_heading1' },
-                        { model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2' },
-                        { model: 'heading3', view: 'h3', title: 'Heading 3', class: 'ck-heading_heading3' }
-                    ]
-                }
-            })
-            .then(editor => {
-                editor.model.document.on('change:data', () => {
-                    document.querySelector('#postContent').value = editor.getData();
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            ClassicEditor
+                .create(document.querySelector('#editor'), {
+                    toolbar: ['heading', '|', 'bold', 'italic', 'underline', 'link', 'bulletedList', 'numberedList', 'blockQuote', 'undo', 'redo'],
+                    heading: {
+                        options: [
+                            { model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
+                            { model: 'heading1', view: 'h1', title: 'Heading 1', class: 'ck-heading_heading1' },
+                            { model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2' },
+                            { model: 'heading3', view: 'h3', title: 'Heading 3', class: 'ck-heading_heading3' }
+                        ]
+                    }
+                })
+                .then(editor => {
+                    editor.model.document.on('change:data', () => {
+                        document.querySelector('#postContent').value = editor.getData();
+                    });
+                })
+                .catch(error => {
+                    console.error(error);
                 });
-            })
-            .catch(error => {
-                console.error(error);
-            });
-    });
-</script>
+        });
+    </script>
 </body>
-
 </html>

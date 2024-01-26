@@ -17,7 +17,114 @@
 
     <!-- Your custom styles -->
     <link th:href="@{/css/profil.css}" rel="stylesheet" />
+
+
+<style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+            color: #495057;
+            padding: 20px;
+        }
+
+        .container {
+            margin-top: 50px;
+        }
+
+        #content {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .profile-info {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .user-info,
+        .user-bio,
+        .user-posts {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .user-info img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 5px solid #007bff;
+            margin-bottom: 10px;
+        }
+
+        .change-picture-btn {
+            margin-top: 10px;
+        }
+
+        .edit-bio-btn,
+        .btn-primary,
+        .btn-secondary {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        .edit-bio-btn:hover,
+        .btn-primary:hover,
+        .btn-secondary:hover {
+            background-color: #0056b3;
+        }
+
+        .bio-textarea {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        .post-card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .post-card img {
+            max-width: 100%;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .post-card-body {
+            padding: 15px;
+        }
+
+        .post-card-title {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+
+        .post-card-content {
+            margin-bottom: 15px;
+        }
+
+        .post-card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .post-card-buttons {
+            display: flex;
+            gap: 10px;
+        }
+    </style>
 </head>
+
+
 
 <body>
     <!-- Navigation -->
@@ -49,25 +156,32 @@
         </div>
     </nav>
 
-    <div class="container mt-5">
-        <!-- Page Content -->
-        <div id="content" class="p-4">
-            <div class="row">
-                <!-- User Info Section -->
-                <div class="col-md-4">
-                    <div class="card mb-4">
-                        <div class="card-body text-center">
-                            <h5 class="card-title">Welcome, <span th:if="${authentication != null}"
-                                    th:text="${authentication.principal.username}"></span>!</h5>
-                            <img th:src="@{'/profile-picture/' + ${user.id}}" class="img-fluid rounded-circle profile-picture"
-                                alt="Profile Picture" />
-                        </div>
-                    </div>
 
-                    <!-- Change Profile Picture Section -->
-                    <div class="card mb-4">
-                        <div class="card-body text-center">
-                            <h5 class="card-title">Change Profile Picture</h5>
+
+
+
+
+ <div class="container">
+        <div id="content">
+            <div class="profile-info">
+                <div class="user-info">
+                    <img th:src="@{'/profile-picture/' + ${user.id}}" class="img-fluid rounded-circle" alt="Profile Picture" />
+                    <br>
+                    <a href="#" class="btn btn-primary change-picture-btn" data-toggle="modal" data-target="#changePictureModal">Change Profile Picture</a>
+                </div>
+            </div>
+
+            <!-- Change Profile Picture Modal -->
+            <div class="modal fade" id="changePictureModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Change Profile Picture</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
                             <form th:action="@{/uploadProfilePicture}" method="post" enctype="multipart/form-data">
                                 <div class="custom-file">
                                     <input type="file" class="custom-file-input" id="customFile" name="file" accept="image/*">
@@ -77,59 +191,40 @@
                             </form>
                         </div>
                     </div>
-
-                    <!-- Bio Section -->
-                    <div class="card mb-4">
-                        <div class="card-body text-center">
-                            <h5 class="card-title">Bio</h5>
-                            <p class="card-text" th:text="${user.bio}" id="bioText">This is where you can write a brief bio about
-                                yourself. Tell others about your interests and expertise.</p>
-                            <button id="editBioBtn" class="btn btn-success" onclick="toggleEdit()">Edit Bio</button>
-
-                            <!-- Bio Edit Form -->
-                            <form th:action="@{/editBio}" th:object="${user}" method="post" id="bioForm"
-                                style="display: none;">
-                                <div class="form-group">
-                                    <textarea th:field="*{bio}" class="form-control" rows="4"></textarea>
-                                </div>
-                                <button type="submit" class="btn btn-primary">Save Bio</button>
-                                <button type="button" class="btn btn-secondary" onclick="toggleEdit()">Cancel</button>
-                            </form>
-                        </div>
-                    </div>
-
-                    <!-- Account Section -->
-                    <div class="card">
-                        <div class="card-body text-center">
-                            <h5 class="card-title">Account</h5>
-                            <!-- Add account information or settings -->
-                            <a href="#" class="btn btn-primary">Account Settings</a>
-                        </div>
-                    </div>
                 </div>
+            </div>
 
-                <!-- User Posts Section -->
-                <div class="col-md-8">
-                    <h2 class="mb-4">Your Posts</h2>
+            <div class="row">
+                <div class="col-md-12 user-bio">
+                    <h5>Bio</h5>
+                    <p th:text="${user.bio}" id="bioText">This is where you can write a brief bio about yourself. Tell others about your interests and expertise.</p>
+                    <button id="editBioBtn" class="btn btn-success edit-bio-btn" onclick="toggleEdit()">Edit Bio</button>
+                    <form th:action="@{/editBio}" th:object="${user}" method="post" id="bioForm" style="display: none;">
+                        <div class="form-group">
+                            <textarea th:field="*{bio}" class="form-control bio-textarea" rows="4"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Save Bio</button>
+                        <button type="button" class="btn btn-secondary" onclick="toggleEdit()">Cancel</button>
+                    </form>
+                </div>
+            </div>
 
-                    <!-- Iterate through user posts and display post cards -->
+            <div class="row justify-content-center">
+                <div class="col-md-8 user-posts">
+                    <h2>Your Posts</h2>
                     <div th:each="post : ${userPosts}">
-                        <div class="card mb-4">
-                            <div class="card-body">
-                                <!-- Display a smaller profile picture -->
-                                <img th:if="${post.authorImage != null and post.authorImage.length > 0}" 
-                                    th:src="@{'/post-images/' + ${post.id}}" alt="Author Image" class="img-thumbnail" />
-                                
-                                <h5 class="card-title" th:text="${post.title}"></h5>
-                                
-<!--                                 <p class="card-text" th:utext="${#strings.length(post.content) > 100 ? post.content.substring(0, 100) + '...' : post.content}"></p> -->
-<div class="card-text" th:utext="${post.content != null ? (#strings.length(post.content) > 100 ? post.content.substring(0, 50) + '...' : post.content) : ''}"></div>
-                                
+                        <div class="card post-card col-md-12">
+                            <img th:if="${post.authorImage != null and post.authorImage.length > 0}" th:src="@{'/post-images/' + ${post.id}}" alt="Post Image" class="card-img-top" />
+                            <div class="post-card-body">
+                                <h5 class="card-title post-card-title" th:text="${post.title}"></h5>
+                                <div class="card-text post-card-content" th:utext="${post.content != null ? (#strings.length(post.content) > 100 ? post.content.substring(0, 50) + '...' : post.content) : ''}"></div>
+                            </div>
+                            <div class="card-footer post-card-footer">
                                 <p class="card-text" th:text="${#temporals.format(post.createdOn, 'dd-MM-yyyy HH:mm:ss')}"></p>
-                                
-                                <a th:href="@{'/viewPost/' + ${post.id}}" class="btn btn-primary">Read More</a>
-                                <a th:href="@{'/deletePost/' + ${post.id}}" class="btn btn-danger">Delete Post</a>
-                                
+                                <div class="post-card-buttons">
+                                    <a th:href="@{'/viewPost/' + ${post.id}}" class="btn btn-primary">Read More</a>
+                                    <a th:href="@{'/deletePost/' + ${post.id}}" class="btn btn-danger">Delete Post</a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -138,26 +233,22 @@
         </div>
     </div>
 
-    <!-- Bootstrap JS and jQuery -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <!-- Bootstrap JS and Popper.js -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-    <!-- Your custom script -->
-    <script th:src="@{/js/main.js}"></script>
-    <!-- JavaScript to toggle between view and edit modes -->
-    <script th:inline="javascript">
+    <script>
         function toggleEdit() {
-            var bioSection = document.getElementById('editBioBtn');
-            var bioForm = document.getElementById('bioForm');
-            var bioText = document.getElementById('bioText');
+            var bioForm = document.getElementById("bioForm");
+            var bioText = document.getElementById("bioText");
 
-            if (bioSection.style.display === 'none') {
-                bioSection.style.display = 'block';
-                bioForm.style.display = 'none';
+            if (bioForm.style.display === "none") {
+                bioForm.style.display = "block";
+                bioText.style.display = "none";
             } else {
-                bioSection.style.display = 'none';
-                bioForm.style.display = 'block';
+                bioForm.style.display = "none";
+                bioText.style.display = "block";
             }
         }
     </script>
