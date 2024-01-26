@@ -39,8 +39,9 @@ private List<Post> post = new ArrayList<>();
 @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
 private List<Forum> forum = new ArrayList<>();
 
-@OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
-private List<Comment> comment = new ArrayList<>();
+@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+private List<Comment> comments = new ArrayList<>();
+
 
 private String bio ; 
 
