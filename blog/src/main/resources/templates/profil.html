@@ -285,12 +285,22 @@
             </div>
         </div>
     </nav>
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
 
  <div class="container">
         <div id="content">
             <div class="profile-info">
                 <div class="user-info">
+                
                     <img th:src="@{'/profile-picture/' + ${user.id}}" class="img-fluid rounded-circle" alt="Profile Picture" />
                     <br>
                     <a href="#" class="btn btn-primary change-picture-btn" data-toggle="modal" data-target="#changePictureModal">Change Profile Picture</a>
@@ -338,23 +348,48 @@
             <div class="row justify-content-center">
                 <div class="col-md-8 user-posts">
                     <h2>Your Posts</h2>
-                    <div th:each="post : ${userPosts}">
+<div th:each="post, postIndex : ${userPosts}">
                         <div class="card post-card col-md-12">
                             <img th:if="${post.authorImage != null and post.authorImage.length > 0}" th:src="@{'/post-images/' + ${post.id}}" alt="Post Image" class="card-img-top" />
+                            
+                            
+                            
+                          
                             <div class="post-card-body">
-                                <h5 class="card-title post-card-title" th:text="${post.title}"></h5>
-                                <div class="card-text post-card-content" th:utext="${post.content != null ? (#strings.length(post.content) > 100 ? post.content.substring(0, 50) + '...' : post.content) : ''}"></div>
-                            </div>
+							    <h5 class="card-title post-card-title" th:text="${post.title}"></h5>
+							    <div class="card-text post-card-content" th:utext="${post.content != null ? (#strings.length(post.content) > 100 ? post.content.substring(0, 50) + '...' : post.content) : ''}" id="postContentText"></div>
+							   
+  <button class="btn btn-success edit-post-content-btn" th:onclick="'toggleEditPostContent(' + ${post.id} + ')'" >Edit Content</button>
+    <form th:action="@{'/editPost/' + ${post.id}}" th:object="${post}" method="post" style="display: none;" class="edit-post-form" th:id="'editForm' + ${post.id}">
+        <!-- ... your existing code ... -->
+							    
+							        <div class="form-group">
+							            <textarea th:field="*{content}" class="form-control post-content-textarea" rows="4"></textarea>
+							        </div>
+							        <button type="submit" class="btn btn-primary">Save Content</button>
+							        <button type="button" class="btn btn-secondary" onclick="toggleEditPostContent()">Cancel</button>
+							    </form>
+								</div>
+                            
+                            
+                            
                             <div class="card-footer post-card-footer">
                                 <p class="card-text" th:text="${#temporals.format(post.createdOn, 'dd-MM-yyyy HH:mm:ss')}"></p>
+                                
+                                
                                 <div class="post-card-buttons">
                                     <a th:href="@{'/viewPost/' + ${post.id}}" class="btn btn-primary">Read More</a>
-                                      <a th:href="@{'/editPost/' + ${post.id}}" class="btn btn-success">Edit Post</a>
+<!--                                       <a th:href="@{'/editPost/' + ${post.id}}" class="btn btn-success">Edit Post</a> -->
                                
                                     <a th:href="@{'/deletePost/' + ${post.id}}" class="btn btn-danger">Delete Post</a>
                                     
                                 </div>
                             </div>
+                            
+                            
+                            
+                            
+                            
                         </div>
                     </div>
                 </div>
@@ -381,7 +416,30 @@
                 bioText.style.display = "block";
             }
         }
+        
+        function toggleEditPostContent(postId) {
+            var postContentText = document.getElementById("postContentText" + postId);
+            var postEditForm = document.getElementById("editForm" + postId);
+
+            if (postEditForm.style.display === "none") {
+                postEditForm.style.display = "block";
+                postContentText.style.display = "none";
+            } else {
+                postEditForm.style.display = "none";
+                postContentText.style.display = "block";
+            }
+        }
+
+
+
     </script>
 </body>
 
 </html>
+
+
+
+
+
+
+

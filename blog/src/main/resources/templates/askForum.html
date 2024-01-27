@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Forum</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://cdn.ckeditor.com/ckeditor5/41.0.0/classic/ckeditor.js"></script>
+</head>
+
+<body>
+    <div class="container mt-5">
+        <!-- Forum Title -->
+        <h1 class="mb-4">Welcome to the Forum</h1>
+
+        <!-- Ask a Question Section -->
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">Ask a Question</h5>
+
+                <form th:action="@{/saveForum}" method="post" th:object="${forum}">
+                    <div class="form-group">
+                      
+                    <div class="form-group">
+                        <label for="question">Your Question :</label>
+                        <div class="editor-container">
+                            <div id="editor"></div>
+                        </div>
+                        <input type="hidden" id="question" name="question" th:field="*{question}" required>
+                    </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit Question</button>
+                    <a th:href="@{/profilPage}" class="btn btn-secondary">Back to Profile</a>
+                    
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+  
+</body>
+  <!-- Bootstrap JS and Popper.js -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            ClassicEditor
+                .create(document.querySelector('#editor'), {
+                    toolbar: ['heading', '|', 'bold', 'italic', 'underline', 'link', 'bulletedList', 'numberedList', 'blockQuote', 'undo', 'redo'],
+                    heading: {
+                        options: [
+                            { model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
+                            { model: 'heading1', view: 'h1', title: 'Heading 1', class: 'ck-heading_heading1' },
+                            { model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2' },
+                            { model: 'heading3', view: 'h3', title: 'Heading 3', class: 'ck-heading_heading3' }
+                        ]
+                    }
+                })
+                .then(editor => {
+                    editor.model.document.on('change:data', () => {
+                        document.querySelector('#question').value = editor.getData();
+                    });
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+        });
+    </script>
+</html>

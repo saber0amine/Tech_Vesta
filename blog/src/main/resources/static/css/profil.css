@@ -1,0 +1,115 @@
+/* Add your custom styles here */
+
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar {
+    background-color: #f8f9fa;
+    padding: 10px;
+}
+
+.navbar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar li {
+    margin-right: 10px;
+}
+
+.navbar p, .navbar button {
+    margin: 0;
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+}
+
+.navbar_login {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.container {
+    margin-top: 20px;
+}
+
+/* Profile Picture Section */
+.card.mb-4 .card-body {
+    text-align: center;
+}
+
+.profile-picture {
+    width: 150px;
+    height: 150px;
+    border: 3px solid #007bff;
+    border-radius: 50%;
+    margin-bottom: 20px;
+}
+
+/* Change Profile Picture Section */
+.card.mb-4:nth-child(2) .card-body {
+    text-align: center;
+}
+
+/* Bio Section */
+.card.mb-4:nth-child(3) .card-body {
+    text-align: center;
+}
+
+.edit-bio-button {
+    background-color: #ff8040;
+    color: #fff;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Account Section */
+.card.mb-4:nth-child(4) .card-body {
+    text-align: center;
+}
+
+.card.mb-4:nth-child(4) a.btn-primary {
+    margin-top: 20px;
+}
+
+/* User Posts Section */
+.col-md-4 {
+    text-align: center;
+}
+
+.col-md-4 .card {
+    margin-bottom: 20px;
+}
+
+.col-md-4 .mb-4 .card img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+.col-md-8 .mb-4 .card .card-body {
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.col-md-8 .mb-4 .card a.btn-primary {
+    display: inline-block;
+    background-color: #007bff;
+    color: #fff;
+    padding: 8px 16px;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.col-md-8 .mb-4 .card a.btn-primary:hover {
+    background-color: #0056b3;
+}

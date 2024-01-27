@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>View Post</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+            color: #495057;
+            padding: 20px;
+        }
+
+        .post-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            margin-top: 20px;
+        }
+
+        h1 {
+            color: #007bff;
+        }
+
+        p {
+            line-height: 1.6;
+        }
+
+        img {
+            max-width: 100%;
+            border-radius: 12px;
+            margin-top: 20px;
+        }
+
+        .back-button {
+            margin-top: 30px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .back-button:hover {
+            background-color: #0056b3;
+        }
+
+        .profile-info {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .profile-picture {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            margin-right: 20px;
+            border: 3px solid #007bff;
+        }
+
+        .post-content {
+            margin-top: 30px;
+            border-top: 1px solid #dee2e6;
+            padding-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="post-container">
+        <div class="profile-info">
+            <img th:if="${post.user != null and post.user.profilePicture != null}" th:src="@{'/profile-picture/' + ${post.user.id}}" class="img-fluid profile-picture" alt="Profile Picture" />
+            <div>
+                <h1 class="mb-3" th:text="${post.title}"></h1>
+                <p class="text-muted" th:text="'Posted on ' + ${#temporals.format(post.createdOn, 'dd-MM-yyyy HH:mm:ss')}"></p>
+            </div>
+        </div>
+
+        <img th:if="${post.authorImage != null and post.authorImage.length > 0}" th:src="@{'/post-images/' + ${post.id}}" alt="Author Image" class="img-fluid rounded mb-4" />
+
+        <div class="post-content" th:utext="${post.content}"></div>
+
+        <a th:href="@{/profilPage}" class="btn btn-primary back-button">Back to Profile</a>
+
+    </div>
+
+    <!-- Bootstrap JS and Popper.js -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

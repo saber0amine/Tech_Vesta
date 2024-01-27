@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>🌟 Welcome to Our Awesome Posts 🌟</title> 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            background-color: #ffffff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            padding: 30px;
+            margin-top: 50px;
+        }
+
+        h1 {
+            color: #007bff;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .card {
+            transition: transform 0.2s;
+            border: none;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+        }
+
+        .profile-picture {
+            width: 50px;
+            height: 50px;
+        }
+    
+
+        .btn-primary:hover {
+            background-color: #ffca2b; 
+            border-color: #ffca2b;
+        }
+
+        .card-title {
+            color: #28a745; 
+        }
+
+        .card-subtitle,
+        .card-text {
+            color: #6c757d; 
+        }
+
+        .btn-sm {
+            font-size: 14px; 
+        }
+        
+        
+        
+      .search-form,
+        .sort-form {
+            background-color: #ffffff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .search-form input {
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+
+        .search-form .input-group-append {
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+
+        .sort-form label {
+            font-weight: bold;
+            
+        }
+
+        .sort-form select {
+            width: 286%; 
+        
+            flex: 1; 
+            margin-right: 0px; 
+        }
+
+        .sort-form button {
+            width: 100px; 
+           margin-left: 244px; 
+            
+        }
+
+        .form-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .search-form,
+        .sort-form {
+            flex: 1;
+            min-width: 0;
+        }
+        
+        
+    #mainNav {
+            background-color: #2c3e50; 
+            padding: 15px 0; 
+            border-bottom: 1px solid #34495e; 
+        }
+
+        #mainNav .navbar-brand img {
+            filter: brightness(0) invert(1);
+        }
+
+        #mainNav .nav-link {
+ color: #2c3e50 !important        
+ }
+
+        #mainNav .nav-item:hover .nav-link {
+            color: #3498db !important;
+        }
+
+        #mainNav .dropdown-menu {
+            background-color: #2c3e50;
+            border: none;
+        }
+
+        #mainNav .dropdown-menu a {
+            color: #ecf0f1 !important;
+        }
+
+        #mainNav .dropdown-menu a:hover {
+            background-color: #34495e !important; 
+        }
+
+        #mainNav .profile-img {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        
+        
+        
+        
+    </style>
+</head>
+
+<body>
+
+
+
+
+
+<nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
+    <div class="container px-4 px-lg-5">
+            <img class="mx-auto rounded-circle" src="/assets/img/R.jpg" width="50px">
+        
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/aboutPage}">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/CreationPostPage}">Add Your Post</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/allPosts}">All Posts</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/contactPage}">Contact</a>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Account
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" th:href="@{/profilPage}">Profile</a>
+                        <a class="dropdown-item" th:href="@{/lougOut}">Log out</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="container">
+        <h1 class="mb-4 text-center">Explore Our Amazing Posts </h1> 
+
+        <div class="form-container mb-4">
+            <!-- Search Form -->
+            <div class="search-form">
+                <form th:action="@{/search}" method="get">
+                    <div class="input-group">
+                        <input type="text" name="query" class="form-control" placeholder="Search by title or content of  posts...">
+                        <div class="input-group-append">
+                            <button type="submit" class="btn btn-primary">🔍 Search</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Sort Form -->
+            <div class="sort-form">
+                <form th:action="@{/sortedPosts}" method="get">
+                    <div class="form-row align-items-center">
+                        <div class="col-auto my-1">
+<!--                             <label class="mr-sm-2" for="inlineFormCustomSelect">Sort By:</label> -->
+                            <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="sort">
+                                <option value="createdOn,asc">Oldest First</option>
+                                <option value="createdOn,desc">Newest First</option>
+                                <option value="title,asc">Title A-Z</option>
+                                <option value="title,desc">Title Z-A</option>
+                            </select>
+                        </div>
+                        <div class="col-auto my-1">
+                            <button type="submit" class="btn btn-primary">Apply</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+   
+
+
+        <div class="row">
+             <div class="col-lg-4 col-md-6 mb-4" th:each="post : ${allPosts}">
+                <div class="card h-100 shadow-sm">
+                     <img th:if="${post.authorImage != null and post.authorImage.length > 0}" 
+                        th:src="@{'/post-images/' + ${post.id}}" alt="Author Image" class="card-img-top img-thumbnail rounded-top">
+
+                    <div class="card-body d-flex flex-column">
+                         <img th:if="${post.user != null and post.user.profilePicture != null}" 
+                            th:src="@{'/profile-picture/' + ${post.user.id}}" class="img-fluid rounded-circle profile-picture mb-3"
+                            alt="Profile Picture">
+
+                         <h5 class="card-title font-weight-bold h6 mb-3" th:text="${post.title}"></h5>
+
+                         <h6 class="card-subtitle mb-2 text-muted" th:text="'Created By  ' + ${post.username}"></h6>
+
+                         <p class="card-text small flex-grow-1" th:utext="${post.content != null ? (#strings.length(post.content) > 100 ? post.content.substring(0, 150) + '...' : post.content) : ''}"></p>
+
+                         <p class="card-text small text-muted mb-3" th:text="${#temporals.format(post.createdOn, 'dd-MM-yyyy HH:mm:ss')}"></p>
+
+                         <a th:href="@{'/viewPost/' + ${post.id}}" class="btn btn-primary btn-sm mt-auto">Read More 📖</a> <!-- Added a book emoji for charm -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+
+<script src="https://kit.fontawesome.com/your-font-awesome-kit.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>
