@@ -74,7 +74,20 @@ return "profil";
     }
 
     
-   
+    @GetMapping("/publicViewPost/{postId}")
+    public String publicViewPost(@PathVariable Long postId, Model model) {
+        Optional<Post> optionalPost = postRepository.findById(postId);
+
+        if (optionalPost.isPresent()) {
+            Post post = optionalPost.get();
+            model.addAttribute("post", post);
+        } else {
+return "profil";       
+}
+
+        return "publicViewPost";
+    }
+
     
     @RestController
     @RequestMapping("/post-images")

@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.project.blog.model.Comment;
+import com.project.blog.model.Forum;
 import com.project.blog.model.Post;
 import com.project.blog.model.User;
 import com.project.blog.repository.PostRepository;
@@ -43,7 +45,7 @@ public class UserProfilController {
     public String profilPage(Authentication authentication, Model model) {
         if (authentication != null) {
             Optional<User> userWithPosts = userRepository.findUserWithPostsByUserName(authentication.getName());
-            model.addAttribute("post", new Post()); // Adjust with your actual attribute
+            model.addAttribute("post", new Post());
 
             if (userWithPosts.isPresent()) {
                 User user = userWithPosts.get();
@@ -191,7 +193,28 @@ System.out.println("EROOOOOOOOOOR PIC *****************************" +e);       
     
     
     
-    
+    @GetMapping("/userStat/{userId}")
+    public String getUserStatistics(@PathVariable Long userId, Model model) {
+        Optional<User> userOptional = userRepository.findById(userId);
+        if (userOptional.isPresent()) {
+            User user = userOptional.get();
+            List<Post> userPosts = user.getPost();
+            List<Comment> userComments = user.getComments();
+            List<Forum> userForums = user.getForum();
+
+            model.addAttribute("user", user);
+            model.addAttribute("userPosts",userPosts);
+            model.addAttribute("userComments",userComments); 
+            model.addAttribute("userForums",userForums); 
+
+
+
+            return "userStat";
+        } else {
+            return "askFrorum";
+        }
+    }
+
     
     
     

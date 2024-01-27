@@ -264,9 +264,12 @@
                         th:src="@{'/post-images/' + ${post.id}}" alt="Author Image" class="card-img-top img-thumbnail rounded-top">
 
                     <div class="card-body d-flex flex-column">
+                                                    <a class="nav-link" th:href="@{/userStat/{userId}(userId=${post.user.id})}">
+                    
                          <img th:if="${post.user != null and post.user.profilePicture != null}" 
                             th:src="@{'/profile-picture/' + ${post.user.id}}" class="img-fluid rounded-circle profile-picture mb-3"
                             alt="Profile Picture">
+                            </a>
 
                          <h5 class="card-title font-weight-bold h6 mb-3" th:text="${post.title}"></h5>
 
@@ -276,7 +279,7 @@
 
                          <p class="card-text small text-muted mb-3" th:text="${#temporals.format(post.createdOn, 'dd-MM-yyyy HH:mm:ss')}"></p>
 
-                         <a th:href="@{'/viewPost/' + ${post.id}}" class="btn btn-primary btn-sm mt-auto">Read More 📖</a> <!-- Added a book emoji for charm -->
+                         <a th:href="@{'/publicViewPost/' + ${post.id}}" class="btn btn-primary btn-sm mt-auto">Read More 📖</a> 
                     </div>
                 </div>
             </div>

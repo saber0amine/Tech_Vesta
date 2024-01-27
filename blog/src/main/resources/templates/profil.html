@@ -6,16 +6,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
 
-    <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <!-- Your custom styles -->
     <link th:href="@{/css/profil.css}" rel="stylesheet" />
 
 
@@ -182,7 +178,6 @@
    <!-- Navbar HTML structure -->
     <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
         <div class="container px-4 px-lg-5">
-            <!-- Logo picture on the left -->
             <img class="mx-auto rounded-circle profile-img" src="/assets/img/R.jpg" alt="User Profile">
 
             <!-- Navbar toggle button -->
@@ -254,9 +249,11 @@
         <div id="content">
             <div class="profile-info">
                 <div class="user-info">
-                                                    <a class="nav-link" th:href="@{/userStat}">
-<!--                 when the  click on the user image it wil redirct him to a page that conatin user information and statistqieus like how much they postes and the comments ect .. -->
-                    <img th:src="@{'/profile-picture/' + ${user.id}}" class="img-fluid rounded-circle" alt="Profile Picture" /> </a>  
+                  <a class="nav-link" th:href="@{/userStat/{userId}(userId=${user.id})}">
+    <!-- Redirects the user to a page containing user information and statistics -->
+    <img th:src="@{'/profile-picture/' + ${user.id}}" class="img-fluid rounded-circle" alt="Profile Picture" />
+</a>
+
                     <br>
                     <a href="#" class="btn btn-primary change-picture-btn" data-toggle="modal" data-target="#changePictureModal">Change Profile Picture</a>
                 </div>

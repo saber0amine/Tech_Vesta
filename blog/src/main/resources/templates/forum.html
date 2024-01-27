@@ -172,7 +172,11 @@
         <div th:each="forum : ${forums}" class="card forum-card">
             <div class="card-body">
                 <div class="forum-user-info">
+                                <a class="nav-link" th:href="@{/userStat/{userId}(userId=${forum.user.id})}">
+    <!-- Redirects the user to a page containing user information and statistics -->
+
                     <img th:src="@{'/profile-picture/' + ${forum.user.id}}" class="user-avatar" alt="User Avatar">
+                    </a>
                     <span th:text="${forum.user.userName}"></span>
                 </div>
                 <h5 class="card-title" th:utext="${forum.question}">Question Title</h5>
@@ -183,7 +187,9 @@
                 <!-- Display comments for each forum -->
                 <div th:each="comment : ${forum.comments}" class="comment-section">
                     <div class="forum-user-info">
-                        <img th:src="@{'/profile-picture/' + ${comment.user.id}}" class="user-avatar" alt="User Avatar">
+                                                    <a class="nav-link" th:href="@{/userStat/{userId}(userId=${forum.user.id})}">
+                    
+                        <img th:src="@{'/profile-picture/' + ${comment.user.id}}" class="user-avatar" alt="User Avatar"> </a>
                         <span th:text="${comment.user.userName}"></span>
                     </div>
                     <p th:utext="${comment.content}">Comment Content</p>
