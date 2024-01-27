@@ -68,7 +68,6 @@ public class UserProfilController {
             model.addAttribute("user", user);
 
             postRepository.deleteById(postId);
-            // Redirect to refresh the page
             return "redirect:/profilPage";
         } else {
             return "profil";
@@ -85,10 +84,8 @@ public class UserProfilController {
             Post post = optionalPost.get();
             // Update post content
             post.setContent(updatedPost.getContent());
-            // Save the updated post
             postRepository.save(post);
 
-            // Redirect to refresh the page
             return "redirect:/profilPage";
         } else {
             return "redirect:/profilPage";
@@ -143,13 +140,11 @@ public class UserProfilController {
                     // Convert the MultipartFile to a byte array
                     byte[] bytes = file.getBytes();
 
-                    // Set the byte array as the user's profile picture
+                    // Set the byte array as the user's profile picture ( deja image s fourm d'un vd)
                     user.setProfilePicture(bytes);
 
-                    // Save the updated user entity
                     userRepository.save(user);
 
-                    // Redirect to the profile page
                     return "redirect:/profilPage";
                 }
             } catch (IOException e) {

@@ -43,16 +43,12 @@ public class JwtProvider {
 	        Jwts.parser().setSigningKey(key).parseClaimsJws(jwt);
 	        return true;
 	    } catch (io.jsonwebtoken.ExpiredJwtException e) {
-	        // Handle expired token exception
 	        System.out.println("JWT Token has expired.");
 	    } catch (io.jsonwebtoken.MalformedJwtException e) {
-	        // Handle malformed token exception
 	        System.out.println("Malformed JWT Token.");
 	    } catch (io.jsonwebtoken.SignatureException e) {
-	        // Handle signature validation exception
 	        System.out.println("Invalid JWT signature.");
 	    } catch (Exception e) {
-	        // Handle other exceptions
 	        System.out.println("Error validating JWT Token.");
 	    }
 	    return false;

@@ -104,10 +104,7 @@ public class PostService {
 
 	    
 	    public Iterable<Post> getAllPostsSorted(String query, Sort sort) {
-	        // Implement the logic to retrieve all posts with sorting
 	        if (query != null && !query.isEmpty()) {
-	            // If there's a query, you might want to implement search logic here
-	            // For simplicity, I'm assuming you have a method in your repository like findByTitleContainingIgnoreCase
 	            return postRepository.findByTitleContainingIgnoreCase(query, sort);
 	        } else {
 	            return postRepository.findAll(sort);

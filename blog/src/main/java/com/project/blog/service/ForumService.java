@@ -60,7 +60,7 @@ public List<Forum> findAll() {
 }
 
 
-@Transactional  // Ensure that the method is transactional
+@Transactional  // ghire to ensure that the method is transactional
 public void addComment(Long forumId, Comment comment) {
     Forum forum = forumRepository.findById(forumId).orElseThrow(() -> new RuntimeException("Forum not found"));
 

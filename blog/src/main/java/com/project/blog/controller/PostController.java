@@ -69,7 +69,6 @@ public class PostController {
 return "profil";       
 }
 
-        // Return the viewPost template
         return "viewPost";
     }
 
@@ -160,7 +159,7 @@ sortObj = Sort.by(Sort.Direction.fromString(sortParams[1]), sortParams[0]);
 }
 }
 
-// Retrieve all posts without pagination
+// Retrieve all posts without pagination ( apres  o nkhdm pagination)
 Iterable<Post> allPosts;
 if (sortObj != null) {
 allPosts = postService.getAllPostsSorted(query, sortObj);
