@@ -2,6 +2,8 @@ package com.project.blog.controller;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -9,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,6 +32,9 @@ import com.project.blog.service.PostService;
 
 import io.jsonwebtoken.io.IOException;
 import jakarta.annotation.Resource;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.transaction.Transactional;
 
 @Controller
@@ -50,6 +57,8 @@ public class UserProfilController {
             if (userWithPosts.isPresent()) {
                 User user = userWithPosts.get();
                 List<Post> userPosts = user.getPost();
+                Collections.sort(userPosts, (post1, post2) -> post2.getCreatedOn().compareTo(post1.getCreatedOn()));
+
                 model.addAttribute("user", user);
                 model.addAttribute("authentication", authentication);
                 model.addAttribute("userPosts", userPosts);
@@ -57,6 +66,27 @@ public class UserProfilController {
         }
         return "profil";
     }
+    @GetMapping("/searchUserPost")
+    public String searchUserPos(@RequestParam("query") String query, Model model , Authentication authentication) {
+        if (authentication != null) {
+            Optional<User> userWithPosts = userRepository.findUserWithPostsByUserName(authentication.getName());
+            model.addAttribute("post", new Post());
+
+            if (userWithPosts.isPresent()) {
+                User user = userWithPosts.get();
+                List<Post> userPosts =  postService.searchUserPosts(query , user.getId());
+                model.addAttribute("user", user);
+                model.addAttribute("authentication", authentication);
+                model.addAttribute("userPosts", userPosts);
+            }
+            
+            
+        }
+       
+        return "profil";
+    }
+    
+    
     @Transactional 
     @GetMapping("/deletePost/{postId}")
     public String deletePost(@PathVariable Long postId, Authentication authentication, Model model) {
@@ -213,6 +243,19 @@ System.out.println("EROOOOOOOOOOR PIC *****************************" +e);       
     
     
     
+    
+
+    @GetMapping("/logOut")
+    public String logOut(HttpServletRequest request, HttpServletResponse response) {
+        Cookie JWT = new Cookie("JWT", null);
+        JWT.setPath("/");
+        JWT.setMaxAge(0);
+        response.addCookie(JWT);
+
+        return "redirect:/loginPage?logout"; // Redirect to your login page with a logout parameter
+    }
+
+
     
     
     

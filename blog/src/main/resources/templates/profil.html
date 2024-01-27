@@ -217,14 +217,14 @@
                             <a class="dropdown-item" th:href="@{/profilPage}">Profile</a>
                             <a class="dropdown-item" th:href="@{/askforum}">Ask</a>
 
-                            <a class="dropdown-item" th:href="@{/lougOut}">Log out</a>
+                            <a class="dropdown-item" th:href="@{/logOut}">Log out</a>
                         </div>
                     </li>
                 </ul>
 
                 <!-- Search form -->
                 <div class="search-form">
-                    <form th:action="@{/search}" method="get">
+                    <form th:action="@{/searchUserPost}" method="get">
                         <div class="input-group">
                             <input class="form-control" name="query" type="search" placeholder="Search"
                                 aria-label="Search">

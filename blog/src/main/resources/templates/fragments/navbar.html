@@ -2,13 +2,12 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>User Statistics</title>
+    <title>navbar</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
     <style>
         body {
-            font-family: 'Poppins', sans-serif;
             background-color: #f8f9fa;
         }
 
@@ -102,6 +101,8 @@
 </head>
 
 <body>
+<div th:fragment="navbar">
+
     <!-- Navbar HTML structure -->
     <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
         <div class="container px-4 px-lg-5">
@@ -144,127 +145,34 @@
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" th:href="@{/profilPage}">Profile</a>
                             <a class="dropdown-item" th:href="@{/askforum}">Ask</a>
-                            <div class="dropdown-divider"></div>
+
                             <a class="dropdown-item" th:href="@{/lougOut}">Log out</a>
                         </div>
                     </li>
                 </ul>
+
+                <!-- Search form -->
+                <div class="search-form">
+                    <form th:action="@{/search}" method="get">
+                        <div class="input-group">
+                            <input class="form-control" name="query" type="search" placeholder="Search"
+                                aria-label="Search">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-light" type="submit"><i class="fas fa-search"></i></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </nav>
-
-    <div class="container mt-4">
-        <div class="row">
-            <div class="col-md-4">
-                <!-- User Information -->
-                <div class="card forum-card">
-                    <div class="forum-user-info">
-                        <img th:src="@{'/profile-picture/' + ${user.id}}" class="user-avatar"
-                            alt="User Profile Image" />
-                        <p class="mb-0" th:text="${user.userName}"></p>
-                        
-                    </div>
-                    <hr>
-                        <div class="card forum-card">
-                         <p class="mb-0" th:text="${user.bio}"></p>
-                        </div>
-                    <hr>
-                  <div class="card forum-card">
-    <h2>User Statistics</h2>
-    <div class="chart-container">
-        <canvas id="postsChart"></canvas>
     </div>
-    <div class="chart-container">
-        <canvas id="commentsChart"></canvas>
-    </div>
-</div>
+       <!-- Bootstrap JS and Popper.js -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
 
-                </div>
-            </div>
-            <div class="col-md-8">
-                <!-- User Posts -->
-                <div class="card forum-card">
-                    <h2>User Posts Titles : </h2>
-                    <div th:each="post : ${userPosts}" class="comment-box">
-                        <p th:text="${post.title}"></p>
-                         <a th:href="@{'/publicViewPost/' + ${post.id}}" class="btn btn-primary btn-sm mt-auto">Read More about this post</a> 
-                        
-                    </div>
-                    
-                </div>
-                <!-- User Posts -->
-                <div class="card forum-card">
-                    <h2>User Questions</h2>
-                    <div th:each="forum : ${userForums}" class="comment-box">
-                        <p th:utext="${forum.question}"></p>
-                    </div>
-                    
-               
-               <div class="col-md-8">
-                
-                
-            </div>
-        </div>
-    </div>
-
-<script th:inline="javascript">
-    /*<![CDATA[*/
-    document.addEventListener("DOMContentLoaded", function () {
-        var postsData = /*[(${#lists.size(userPosts)})]*/ 0;
-        var commentsData = /*[(${#lists.size(userComments)})]*/ 0;
-
-        var postsChartCtx = document.getElementById("postsChart").getContext("2d");
-        var postsChart = new Chart(postsChartCtx, {
-            type: 'bar',
-            data: {
-                labels: ['Total Posts'],
-                datasets: [{
-                    label: 'Total Posts',
-                    data: [postsData],
-                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                    borderColor: 'rgba(75, 192, 192, 1)',
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
-            }
-        });
-
-        var commentsChartCtx = document.getElementById("commentsChart").getContext("2d");
-        var commentsChart = new Chart(commentsChartCtx, {
-            type: 'bar',
-            data: {
-                labels: ['Total Comments'],
-                datasets: [{
-                    label: 'Total Comments',
-                    data: [commentsData],
-                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                    borderColor: 'rgba(255, 99, 132, 1)',
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
-            }
-        });
-    });
-    /*]]>*/
-</script>
-
-
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 
 </html>

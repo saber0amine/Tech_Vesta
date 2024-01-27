@@ -17,6 +17,7 @@ import com.project.blog.repository.UserRepository;
 import com.project.blog.service.PostService;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.http.HttpHeaders;
@@ -128,7 +129,9 @@ return "profil";
     
     @GetMapping("/allPosts")
     public String allPosts(Model model) {
-    	List<Post> allPosts = postRepository.findAll();    	
+    	List<Post> allPosts = postRepository.findAll();    
+        Collections.sort(allPosts, (post1, post2) -> post2.getCreatedOn().compareTo(post1.getCreatedOn()));
+
     	model.addAttribute("allPosts", allPosts) ;
     	System.out.println("************************"+allPosts.get(0).getUsername());
     	return "allPosts"; 

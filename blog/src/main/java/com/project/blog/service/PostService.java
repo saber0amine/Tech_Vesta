@@ -110,6 +110,15 @@ public class PostService {
 	            return postRepository.findAll(sort);
 	        }
 	    }
+
+
+
+		public List<Post> searchUserPosts(String query, Long id) {
+			return userRepository.findPostByUserAndTitleContainingOrContentContaining(id , query, query) ;
+		}
+
+
+
 	  
 	  
 	  

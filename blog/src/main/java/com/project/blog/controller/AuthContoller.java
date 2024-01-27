@@ -120,7 +120,7 @@ public String saveUser(Model model, @ModelAttribute("user") User user, BindingRe
 	         user.setUserName(userExist.getUserName());
     		 authService.login(user , response) ;
     	     model.addAttribute("authentication", authentication);
-	         return "BlogPage";
+	         return "redirect:/allPosts";
 	     } catch (UserNotFoundExecption e) {
 	         model.addAttribute("error", e.getMessage());
 	         return "login";

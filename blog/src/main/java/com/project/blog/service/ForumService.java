@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.project.blog.model.Comment;
 import com.project.blog.model.Forum;
+import com.project.blog.model.Post;
 import com.project.blog.model.User;
 import com.project.blog.repository.CommentRepository;
 import com.project.blog.repository.ForumRepository;
@@ -75,6 +76,12 @@ public void addComment(Long forumId, Comment comment) {
 
     forum.getComments().add(comment);
     forumRepository.save(forum);
+}
+
+
+public List<Forum> searchForums(String query) {
+	        return forumRepository.findByQuestionContaining(query);
+	  
 }
 
 

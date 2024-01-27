@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .error-container {
+            text-align: center;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+            max-width: 600px;
+            width: 100%;
+        }
+
+        h1 {
+            color: #e44d26;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        p {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .home-link {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .home-link:hover {
+            background-color: #0056b3;
+        }
+
+        i {
+            font-size: 4rem;
+            color: #e44d26;
+            margin-bottom: 20px;
+        }
+
+        .additional-info {
+            margin-top: 30px;
+            font-size: 1rem;
+            color: #6c757d;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="error-container">
+        <i class="fas fa-exclamation-triangle"></i>
+        <h1>Error</h1>
+        <p >An unexpected error occurred. we are sorry its our fault . Please try again later."</p>
+        <a class="home-link" th:href="@{/}">Go back Home</a>
+        <div class="additional-info">
+            <p>If the problem persists, contact support at <a href="mailto:saberamine000@gmail.com">saberamine000@gmail.com</a>.</p>
+            <p>Error code: <span th:text="${errorCode}">500</span></p>
+        </div>
+
+    </div>
+</body>
+</html>
+

@@ -20,6 +20,9 @@ public interface UserRepository extends JpaRepository<User, Long>{
 	 @Query("SELECT u FROM User u LEFT JOIN FETCH u.post WHERE u.userName = :userName")
 	    Optional<User> findUserWithPostsByUserName(@Param("userName") String userName);
  	void deleteByPostId(Long postId);
+ 	@Query("SELECT p FROM User u JOIN u.post p WHERE u.id = :userId AND (p.title LIKE %:query% OR p.content LIKE %:query2%)")
+ 	List<Post> findPostByUserAndTitleContainingOrContentContaining(@Param("userId") Long userId, @Param("query") String query, @Param("query2") String query2);
+
 
 }
 

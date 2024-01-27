@@ -10,4 +10,6 @@ import com.project.blog.model.Forum;
 @Repository
 public interface ForumRepository extends JpaRepository<Forum, Long>{
 
+	List<Forum> findByQuestionContaining(String question);
+
 }
