@@ -4,57 +4,65 @@
 <head>
     <title>View Post</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            background-color: #f8f9fa;
-            color: #495057;
+            background: #f8f9fa;
+            color: #333;
             padding: 20px;
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .post-container {
-            max-width: 800px;
-            margin: 0 auto;
+            max-width: 1100px; 
             background-color: #ffffff;
-            padding: 30px;
             border-radius: 15px;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
             margin-top: 20px;
         }
 
         h1 {
-            color: #007bff;
+            color: #e44d26;
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
         }
 
         p {
             line-height: 1.6;
+            font-size: 1.1rem;
         }
 
         img {
             max-width: 100%;
             border-radius: 12px;
             margin-top: 20px;
-        }
-
-        .back-button {
-            margin-top: 30px;
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            text-decoration: none;
-            transition: background-color 0.3s;
-        }
-
-        .back-button:hover {
-            background-color: #0056b3;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
         }
 
         .profile-info {
             display: flex;
             align-items: center;
+            justify-content: space-between;
             margin-bottom: 20px;
+            padding: 20px;
+            background: #333;
+            color: #fff;
+        }
+
+        .profile-info h1 {
+            font-size: 2rem;
+            margin-bottom: 5px;
+        }
+
+        .profile-info p {
+            font-size: 1rem;
+            color: #ccc;
         }
 
         .profile-picture {
@@ -62,13 +70,57 @@
             height: 70px;
             border-radius: 50%;
             margin-right: 20px;
-            border: 3px solid #007bff;
+            border: 3px solid #e44d26;
         }
 
         .post-content {
-            margin-top: 30px;
+            margin: 20px;
             border-top: 1px solid #dee2e6;
             padding-top: 20px;
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #333;
+        }
+
+        .edit-post-form {
+            display: none;
+            margin-top: 20px;
+            padding: 20px;
+            background: #fff;
+        }
+
+        .edit-post-btn,
+        .delete-post-btn {
+            cursor: pointer;
+            display: inline-block;
+            font-size: 1rem;
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+
+        .edit-post-btn {
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+        }
+
+        .delete-post-btn {
+            background-color: #dc3545;
+            color: #fff;
+            border: none;
+        }
+
+        .scroll-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
         }
     </style>
 </head>
@@ -77,25 +129,56 @@
 
     <div class="post-container">
         <div class="profile-info">
-            <img th:if="${post.user != null and post.user.profilePicture != null}" th:src="@{'/profile-picture/' + ${post.user.id}}" class="img-fluid profile-picture" alt="Profile Picture" />
-            <div>
-                <h1 class="mb-3" th:text="${post.title}"></h1>
+            <div class="d-flex flex-column align-items-start">
+                <h1 th:text="${post.title}"></h1>
                 <p class="text-muted" th:text="'Posted on ' + ${#temporals.format(post.createdOn, 'dd-MM-yyyy HH:mm:ss')}"></p>
             </div>
+                    <img th:if="${post.user != null and post.user.profilePicture != null}" th:src="@{'/profile-picture/' + ${post.user.id}}" class="img-fluid profile-picture" alt="Profile Picture" />
+            
+            <a th:href="@{'/profilPage'}" class="btn btn-primary back-button"><i class="fas fa-arrow-left"></i> Back to Profile</a>
         </div>
+
 
         <img th:if="${post.authorImage != null and post.authorImage.length > 0}" th:src="@{'/post-images/' + ${post.id}}" alt="Author Image" class="img-fluid rounded mb-4" />
 
         <div class="post-content" th:utext="${post.content}"></div>
 
-        <a th:href="@{/profilPage}" class="btn btn-primary back-button">Back to Profile</a>
+        <form th:action="@{'/editPost/' + ${post.id}}" th:object="${post}" method="post" class="edit-post-form">
+            <div class="form-group">
+                <label for="editContent">Edit Content</label>
+                <textarea th:field="*{content}" class="form-control" rows="4" id="editContent"></textarea>
+            </div>
+            <button type="submit" class="btn btn-success edit-post-btn"><i class="fas fa-edit"></i> Save Content</button>
+            <a href="#" class="btn btn-secondary" onclick="toggleEdit()"><i class="fas fa-times"></i> Cancel</a>
+        </form>
 
+        <div class="post-buttons">
+            <button th:onclick="'toggleEdit()'" class="btn btn-success edit-post-btn"><i class="fas fa-edit"></i> Edit Post</button>
+            <a th:href="@{'/deletePost/' + ${post.id}}" class="btn btn-danger delete-post-btn"><i class="fas fa-trash"></i> Delete Post</a>
+        </div>
     </div>
 
-    <!-- Bootstrap JS and Popper.js -->
+    <button class="scroll-btn" onclick="scrollToTop()"><i class="fas fa-arrow-up"></i> Scroll To Top</button>
+
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+
+    <script>
+        function toggleEdit() {
+            var editForm = document.querySelector('.edit-post-form');
+            if (editForm.style.display === 'none') {
+                editForm.style.display = 'block';
+            } else {
+                editForm.style.display = 'none';
+            }
+        }
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
 </body>
 
 </html>

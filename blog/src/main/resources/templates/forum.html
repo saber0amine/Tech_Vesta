@@ -3,23 +3,58 @@
 
 <head>
     <title>Forum</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+Wy60bR4RvBCn0DxzUsSTDDDLZoj3fBIv5U"
-        crossorigin="anonymous">
-
- <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-
-    <!-- Google Fonts -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
-
-    <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-
-    <!-- Your custom styles -->
-    <link th:href="@{/css/profil.css}" rel="stylesheet" />    <style>
+    <style>
         body {
             background-color: #f8f9fa;
+        }
+
+        #mainNav {
+            background-color: #2c3e50;
+            padding: 15px 0;
+            border-bottom: 1px solid #34495e;
+        }
+
+        #mainNav .navbar-brand img {
+            filter: brightness(0) invert(1);
+            margin-right: 10px;
+        }
+
+        #mainNav .nav-link {
+            color: #ecf0f1 !important;
+            font-size: 16px;
+            margin: 0 15px;
+            transition: color 0.3s ease;
+        }
+
+        #mainNav .nav-item:hover .nav-link {
+            color: #3498db !important;
+        }
+
+        #mainNav .dropdown-menu {
+            background-color: #2c3e50;
+            border: none;
+            border-radius: 0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        #mainNav .dropdown-menu a {
+            color: #ecf0f1 !important;
+            transition: background-color 0.3s ease;
+        }
+
+        #mainNav .dropdown-menu a:hover {
+            background-color: #34495e !important;
+        }
+
+        #mainNav .profile-img {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            margin-right: 10px;
+            border: 2px solid #3498db;
         }
 
         .container {
@@ -62,120 +97,19 @@
             font-size: 0.8rem;
             color: #6c757d;
         }
-        
-        
-        
-        
-        
-        
-        
-        
-        
-            
-        #mainNav {
-            background-color: #2c3e50; 
-            padding: 15px 0; 
-            border-bottom: 1px solid #34495e; 
-        }
-
-        #mainNav .navbar-brand img {
-            filter: brightness(0) invert(1);
-            margin-right: 10px; 
-        }
-
-        #mainNav .nav-link {
-            color: #ecf0f1 !important;  
-            font-size: 16px; 
-            margin: 0 15px;  
-            transition: color 0.3s ease;  
-        }
-
-        #mainNav .nav-item:hover .nav-link {
-            color: #3498db !important;  
-        }
-
-        #mainNav .dropdown-menu {
-            background-color: #2c3e50;
-            border: none;
-            border-radius: 0;  
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  
-        }
-
-        #mainNav .dropdown-menu a {
-            color: #ecf0f1 !important;
-            transition: background-color 0.3s ease;  
-        }
-
-        #mainNav .dropdown-menu a:hover {
-            background-color: #34495e !important;  
-        }
-
-        #mainNav .profile-img {
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            margin-right: 10px;
-            border: 2px solid #3498db;   
-        }
-
-        #mainNav .search-form {
-            display: flex;
-            align-items: center;
-            margin-left: auto;  
-        }
-
-        #mainNav .search-form form {
-            display: flex;
-            align-items: center;
-        }
-
-        #mainNav .search-form input {
-            border: none;
-            border-radius: 20px;
-            padding: 8px 15px;  
-            margin-right: 10px;  
-        }
-
-        #mainNav .search-form button {
-            border: none;
-            border-radius: 20px;
-            padding: 8px 15px;  
-        }
-
-        #mainNav .navbar-toggler-icon {
-            color: #ecf0f1;  
-        }
-
-        #mainNav .navbar-toggler {
-            border: none;
-            outline: none;
-            color: #ecf0f1;  
-        }
-
-        @media (max-width: 768px) {
-            #mainNav .navbar-nav {
-                text-align: center;  
-                margin-top: 10px;             }
-
-            #mainNav .navbar-nav .nav-item {
-                margin: 10px 0;  
-            }
-        }
-  
-        
     </style>
 </head>
 
 <body>
-    <div class="container">
-         <!-- Navbar HTML structure -->
+    <!-- Navbar HTML structure -->
     <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
         <div class="container px-4 px-lg-5">
             <!-- Logo picture on the left -->
             <img class="mx-auto rounded-circle profile-img" src="/assets/img/R.jpg" alt="User Profile">
-            
+
             <!-- Navbar toggle button -->
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
@@ -197,18 +131,19 @@
                     <li class="nav-item">
                         <a class="nav-link" th:href="@{/contactPage}">Contact</a>
                     </li>
-<li class="nav-item">
-                             <a class="nav-link" th:href="@{/forum}">Forum</a>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/forum}">Forum</a>
                     </li>
                     <!-- Dropdown menu -->
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Account
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" th:href="@{/profilPage}">Profile</a>
-                             <a class="dropdown-item" th:href="@{/askforum}">Ask</a>
-                            
+                            <a class="dropdown-item" th:href="@{/askforum}">Ask</a>
+
                             <a class="dropdown-item" th:href="@{/lougOut}">Log out</a>
                         </div>
                     </li>
@@ -218,7 +153,8 @@
                 <div class="search-form">
                     <form th:action="@{/search}" method="get">
                         <div class="input-group">
-                            <input class="form-control" name="query" type="search" placeholder="Search" aria-label="Search">
+                            <input class="form-control" name="query" type="search" placeholder="Search"
+                                aria-label="Search">
                             <div class="input-group-append">
                                 <button class="btn btn-outline-light" type="submit"><i class="fas fa-search"></i></button>
                             </div>
@@ -228,7 +164,8 @@
             </div>
         </div>
     </nav>
-    
+
+    <div class="container">
         <h1 class="mb-4 text-center">Welcome to the Forum</h1>
 
         <!-- Display all forums -->
@@ -240,7 +177,8 @@
                 </div>
                 <h5 class="card-title" th:utext="${forum.question}">Question Title</h5>
 
-                <p class="timestamp">Posted on: <span th:text="${#temporals.format(forum.createdOn, 'dd-MM-yyyy HH:mm:ss')}"></span></p>
+                <p class="timestamp">Posted on: <span
+                        th:text="${#temporals.format(forum.createdOn, 'dd-MM-yyyy HH:mm:ss')}"></span></p>
 
                 <!-- Display comments for each forum -->
                 <div th:each="comment : ${forum.comments}" class="comment-section">
@@ -249,7 +187,8 @@
                         <span th:text="${comment.user.userName}"></span>
                     </div>
                     <p th:utext="${comment.content}">Comment Content</p>
-                    <p class="timestamp">Commented on: <span th:text="${#temporals.format(comment.createdOn, 'dd-MM-yyyy HH:mm:ss')}"></span></p>
+                    <p class="timestamp">Commented on: <span
+                            th:text="${#temporals.format(comment.createdOn, 'dd-MM-yyyy HH:mm:ss')}"></span></p>
                 </div>
 
                 <!-- Form to add a new comment -->
@@ -265,44 +204,12 @@
         </div>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
-        integrity="sha384-c3h22BujL+KquX6wJeuD0eZ1aR96VfKGs4xg4S7C6U/r5EqZCcFz2EfoNTW049tF"
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
-        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+Wy60bR4RvBCn0DxzUsSTDDDLZoj3fBIv5U"
-        crossorigin="anonymous"></script>
    <!-- Bootstrap JS and Popper.js -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
 
-    <script>
-        function toggleEdit() {
-            var bioForm = document.getElementById("bioForm");
-            var bioText = document.getElementById("bioText");
-
-            if (bioForm.style.display === "none") {
-                bioForm.style.display = "block";
-                bioText.style.display = "none";
-            } else {
-                bioForm.style.display = "none";
-                bioText.style.display = "block";
-            }
-        }
-    </script></body>
+</body>
 
 </html>
-
-
-
-
-
-
-
-
-
-

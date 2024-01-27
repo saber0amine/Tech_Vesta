@@ -123,43 +123,42 @@
         }
         
         
-        
-        #mainNav {
-            background-color: #2c3e50; 
-            padding: 15px 0; 
-            border-bottom: 1px solid #34495e; 
+     #mainNav {
+            background-color: #2c3e50;
+            padding: 15px 0;
+            border-bottom: 1px solid #34495e;
         }
 
         #mainNav .navbar-brand img {
             filter: brightness(0) invert(1);
-            margin-right: 10px; 
+            margin-right: 10px;
         }
 
         #mainNav .nav-link {
-            color: #ecf0f1 !important;  
-            font-size: 16px; 
-            margin: 0 15px;  
-            transition: color 0.3s ease;  
+            color: #ecf0f1 !important;
+            font-size: 16px;
+            margin: 0 15px;
+            transition: color 0.3s ease;
         }
 
         #mainNav .nav-item:hover .nav-link {
-            color: #3498db !important;  
+            color: #3498db !important;
         }
 
         #mainNav .dropdown-menu {
             background-color: #2c3e50;
             border: none;
-            border-radius: 0;  
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  
+            border-radius: 0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
         #mainNav .dropdown-menu a {
             color: #ecf0f1 !important;
-            transition: background-color 0.3s ease;  
+            transition: background-color 0.3s ease;
         }
 
         #mainNav .dropdown-menu a:hover {
-            background-color: #34495e !important;  
+            background-color: #34495e !important;
         }
 
         #mainNav .profile-img {
@@ -167,53 +166,8 @@
             height: 30px;
             border-radius: 50%;
             margin-right: 10px;
-            border: 2px solid #3498db;   
+            border: 2px solid #3498db;
         }
-
-        #mainNav .search-form {
-            display: flex;
-            align-items: center;
-            margin-left: auto;  
-        }
-
-        #mainNav .search-form form {
-            display: flex;
-            align-items: center;
-        }
-
-        #mainNav .search-form input {
-            border: none;
-            border-radius: 20px;
-            padding: 8px 15px;  
-            margin-right: 10px;  
-        }
-
-        #mainNav .search-form button {
-            border: none;
-            border-radius: 20px;
-            padding: 8px 15px;  
-        }
-
-        #mainNav .navbar-toggler-icon {
-            color: #ecf0f1;  
-        }
-
-        #mainNav .navbar-toggler {
-            border: none;
-            outline: none;
-            color: #ecf0f1;  
-        }
-
-        @media (max-width: 768px) {
-            #mainNav .navbar-nav {
-                text-align: center;  
-                margin-top: 10px;             }
-
-            #mainNav .navbar-nav .nav-item {
-                margin: 10px 0;  
-            }
-        }
-  
         
         
     </style>
@@ -225,14 +179,15 @@
     
     
     
-     <!-- Navbar HTML structure -->
+   <!-- Navbar HTML structure -->
     <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
         <div class="container px-4 px-lg-5">
             <!-- Logo picture on the left -->
             <img class="mx-auto rounded-circle profile-img" src="/assets/img/R.jpg" alt="User Profile">
-            
+
             <!-- Navbar toggle button -->
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
@@ -254,18 +209,19 @@
                     <li class="nav-item">
                         <a class="nav-link" th:href="@{/contactPage}">Contact</a>
                     </li>
-<li class="nav-item">
-                             <a class="nav-link" th:href="@{/forum}">Forum</a>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/forum}">Forum</a>
                     </li>
                     <!-- Dropdown menu -->
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Account
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" th:href="@{/profilPage}">Profile</a>
-                             <a class="dropdown-item" th:href="@{/askforum}">Ask</a>
-                            
+                            <a class="dropdown-item" th:href="@{/askforum}">Ask</a>
+
                             <a class="dropdown-item" th:href="@{/lougOut}">Log out</a>
                         </div>
                     </li>
@@ -275,7 +231,8 @@
                 <div class="search-form">
                     <form th:action="@{/search}" method="get">
                         <div class="input-group">
-                            <input class="form-control" name="query" type="search" placeholder="Search" aria-label="Search">
+                            <input class="form-control" name="query" type="search" placeholder="Search"
+                                aria-label="Search">
                             <div class="input-group-append">
                                 <button class="btn btn-outline-light" type="submit"><i class="fas fa-search"></i></button>
                             </div>
@@ -291,17 +248,15 @@
     
     
     
-    
-    
-    
 
 
  <div class="container">
         <div id="content">
             <div class="profile-info">
                 <div class="user-info">
-                
-                    <img th:src="@{'/profile-picture/' + ${user.id}}" class="img-fluid rounded-circle" alt="Profile Picture" />
+                                                    <a class="nav-link" th:href="@{/userStat}">
+<!--                 when the  click on the user image it wil redirct him to a page that conatin user information and statistqieus like how much they postes and the comments ect .. -->
+                    <img th:src="@{'/profile-picture/' + ${user.id}}" class="img-fluid rounded-circle" alt="Profile Picture" /> </a>  
                     <br>
                     <a href="#" class="btn btn-primary change-picture-btn" data-toggle="modal" data-target="#changePictureModal">Change Profile Picture</a>
                 </div>
@@ -345,58 +300,42 @@
                 </div>
             </div>
 
-            <div class="row justify-content-center">
-                <div class="col-md-8 user-posts">
-                    <h2>Your Posts</h2>
-<div th:each="post, postIndex : ${userPosts}">
-                        <div class="card post-card col-md-12">
-                            <img th:if="${post.authorImage != null and post.authorImage.length > 0}" th:src="@{'/post-images/' + ${post.id}}" alt="Post Image" class="card-img-top" />
-                            
-                            
-                            
-                          
-                            <div class="post-card-body">
-							    <h5 class="card-title post-card-title" th:text="${post.title}"></h5>
-							    <div class="card-text post-card-content" th:utext="${post.content != null ? (#strings.length(post.content) > 100 ? post.content.substring(0, 50) + '...' : post.content) : ''}" id="postContentText"></div>
-							   
-  <button class="btn btn-success edit-post-content-btn" th:onclick="'toggleEditPostContent(' + ${post.id} + ')'" >Edit Content</button>
-    <form th:action="@{'/editPost/' + ${post.id}}" th:object="${post}" method="post" style="display: none;" class="edit-post-form" th:id="'editForm' + ${post.id}">
-        <!-- ... your existing code ... -->
-							    
-							        <div class="form-group">
-							            <textarea th:field="*{content}" class="form-control post-content-textarea" rows="4"></textarea>
-							        </div>
-							        <button type="submit" class="btn btn-primary">Save Content</button>
-							        <button type="button" class="btn btn-secondary" onclick="toggleEditPostContent()">Cancel</button>
-							    </form>
-								</div>
-                            
-                            
-                            
-                            <div class="card-footer post-card-footer">
-                                <p class="card-text" th:text="${#temporals.format(post.createdOn, 'dd-MM-yyyy HH:mm:ss')}"></p>
-                                
-                                
-                                <div class="post-card-buttons">
-                                    <a th:href="@{'/viewPost/' + ${post.id}}" class="btn btn-primary">Read More</a>
-<!--                                       <a th:href="@{'/editPost/' + ${post.id}}" class="btn btn-success">Edit Post</a> -->
-                               
-                                    <a th:href="@{'/deletePost/' + ${post.id}}" class="btn btn-danger">Delete Post</a>
-                                    
-                                </div>
-                            </div>
-                            
-                            
-                            
-                            
-                            
-                        </div>
+<div class="row justify-content-center">
+    <div class="col-md-8 user-posts">
+        <h2>Your Posts</h2>
+        <div th:each="post, postIndex : ${userPosts}">
+            <div class="card mb-4">
+                <img th:if="${post.authorImage != null and post.authorImage.length > 0}" th:src="@{'/post-images/' + ${post.id}}" alt="Post Image" class="card-img-top" />
+                
+                <div class="card-body">
+                    <h5 class="card-title post-card-title" th:text="${post.title}"></h5>
+                    <p class="card-text post-card-content" th:utext="${post.content != null ? (#strings.length(post.content) > 100 ? post.content.substring(0, 50) + '...' : post.content) : ''}" id="postContentText"></p>
+                </div>
+
+                <div class="card-footer post-card-footer">
+                    <p class="card-text" th:text="${#temporals.format(post.createdOn, 'dd-MM-yyyy HH:mm:ss')}"></p>
+                    
+                    <div class="post-card-buttons">
+                        <button class="btn btn-success mr-2 edit-post-content-btn" th:onclick="'toggleEditPostContent(' + ${post.id} + ')'" >Edit Content</button>
+                        <a th:href="@{'/viewPost/' + ${post.id}}" class="btn btn-primary">Read More</a>
+                        <a th:href="@{'/deletePost/' + ${post.id}}" class="btn btn-danger ml-2">Delete Post</a>
                     </div>
+                </div>
+
+                <div class="card-footer" style="display: none;" th:id="'editForm' + ${post.id}">
+                    <form th:action="@{'/editPost/' + ${post.id}}" th:object="${post}" method="post" class="edit-post-form">
+                        <!-- ... your existing code ... -->
+                        <div class="form-group">
+                            <textarea th:field="*{content}" class="form-control post-content-textarea" rows="4"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary mr-2">Save Content</button>
+                        <button type="button" class="btn btn-secondary" onclick="toggleEditPostContent()">Cancel</button>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
-
+</div>
     <!-- Bootstrap JS and Popper.js -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>

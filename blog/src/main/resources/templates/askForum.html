@@ -1,15 +1,172 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Forum</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://cdn.ckeditor.com/ckeditor5/41.0.0/classic/ckeditor.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        #mainNav {
+            background-color: #2c3e50;
+            padding: 15px 0;
+            border-bottom: 1px solid #34495e;
+        }
+
+        #mainNav .navbar-brand img {
+            filter: brightness(0) invert(1);
+            margin-right: 10px;
+        }
+
+        #mainNav .nav-link {
+            color: #ecf0f1 !important;
+            font-size: 16px;
+            margin: 0 15px;
+            transition: color 0.3s ease;
+        }
+
+        #mainNav .nav-item:hover .nav-link {
+            color: #3498db !important;
+        }
+
+        #mainNav .dropdown-menu {
+            background-color: #2c3e50;
+            border: none;
+            border-radius: 0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        #mainNav .dropdown-menu a {
+            color: #ecf0f1 !important;
+            transition: background-color 0.3s ease;
+        }
+
+        #mainNav .dropdown-menu a:hover {
+            background-color: #34495e !important;
+        }
+
+        #mainNav .profile-img {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            margin-right: 10px;
+            border: 2px solid #3498db;
+        }
+
+        .container {
+            margin-top: 50px;
+        }
+
+        .forum-card {
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            background-color: #fff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            padding: 20px;
+        }
+
+        .forum-user-info {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .comment-section {
+            margin-top: 20px;
+            border-top: 1px solid #ddd;
+            padding-top: 15px;
+        }
+
+        .comment-box {
+            margin-top: 20px;
+        }
+
+        .timestamp {
+            font-size: 0.8rem;
+            color: #6c757d;
+        }
+    </style>
 </head>
 
 <body>
+    <!-- Navbar HTML structure -->
+    <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
+        <div class="container px-4 px-lg-5">
+            <!-- Logo picture on the left -->
+            <img class="mx-auto rounded-circle profile-img" src="/assets/img/R.jpg" alt="User Profile">
+
+            <!-- Navbar toggle button -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Navbar items and search form -->
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/aboutPage}">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/CreationPostPage}">Add Your Post</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/allPosts}">All Posts</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/contactPage}">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/forum}">Forum</a>
+                    </li>
+                    <!-- Dropdown menu -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Account
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" th:href="@{/profilPage}">Profile</a>
+                            <a class="dropdown-item" th:href="@{/askforum}">Ask</a>
+
+                            <a class="dropdown-item" th:href="@{/lougOut}">Log out</a>
+                        </div>
+                    </li>
+                </ul>
+
+                <!-- Search form -->
+                <div class="search-form">
+                    <form th:action="@{/search}" method="get">
+                        <div class="input-group">
+                            <input class="form-control" name="query" type="search" placeholder="Search"
+                                aria-label="Search">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-light" type="submit"><i class="fas fa-search"></i></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </nav>
     <div class="container mt-5">
         <!-- Forum Title -->
         <h1 class="mb-4">Welcome to the Forum</h1>
