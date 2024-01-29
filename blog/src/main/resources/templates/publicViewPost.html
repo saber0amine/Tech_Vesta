@@ -137,7 +137,7 @@
             
                     <img th:if="${post.user != null and post.user.profilePicture != null}" th:src="@{'/profile-picture/' + ${post.user.id}}" class="img-fluid profile-picture" alt="Profile Picture" />
             </a>
-            <a th:href="@{'/profilPage'}" class="btn btn-primary back-button"><i class="fas fa-arrow-left"></i> Back to Profile</a>
+            <a th:href="@{/allPosts}" class="btn btn-primary back-button"><i class="fas fa-arrow-left"></i> Back to posts</a>
         </div>
 
 

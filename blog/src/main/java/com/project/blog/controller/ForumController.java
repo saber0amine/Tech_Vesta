@@ -1,5 +1,6 @@
 package com.project.blog.controller;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,6 +53,7 @@ public class ForumController {
 	    @GetMapping("/forum")
 	    public String showAllForums(Model model) {
 	        List<Forum> forums = forumService.findAll();
+	        Collections.sort(forums ,(firstquestion , secondquestion) ->  secondquestion.getCreatedOn().compareTo(firstquestion.getCreatedOn())) ;
 	        model.addAttribute("forums", forums);
 	        model.addAttribute("comment", new Comment());  // Add an empty comment object to the model
 	        return "forum";

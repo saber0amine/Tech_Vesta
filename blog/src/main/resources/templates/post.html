@@ -14,26 +14,116 @@
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link th:href="@{/css/styles.css}" rel="stylesheet" />
+         <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        #mainNav {
+            background-color: #343a40;
+        }
+
+        .masthead {
+            background-size: cover;
+            background-position: center;
+            height: 300px;
+        }
+
+        .post-heading h1,
+        .post-heading h2 {
+            color: #ffffff;
+        }
+
+        .meta {
+            color: #6c757d;
+        }
+
+        article {
+            background-color: #ffffff;
+            border: 1px solid #dee2e6;
+            border-radius: 0.5rem;
+            margin: 20px 0;
+            padding: 20px;
+        }
+
+        article p {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: #6c757d;
+        }
+
+        article h2 {
+            color: #343a40;
+        }
+
+        blockquote {
+            border-left: 5px solid #343a40;
+            margin: 0 0 20px;
+            padding: 10px 20px;
+        }
+
+        blockquote p {
+            color: #6c757d;
+        }
+
+        .caption {
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+
+        footer {
+            background-color: #343a40;
+            padding: 25px 0;
+            color: #ffffff;
+        }
+
+        footer a {
+            color: #ffc107;
+        }
+
+        footer a:hover {
+            color: #ffffff;
+        }
+
+        .social-icons {
+            margin-top: 20px;
+        }
+
+        .social-icons a {
+            font-size: 24px;
+            margin-right: 15px;
+        }
+        
+          .profile-img {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            border: 2px solid #3498db;
+            cursor: pointer;
+        }
+    </style>
     </head>
     <body>
-        <!-- Navigation-->
-        <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
-            <div class="container px-4 px-lg-5">
-                <a class="navbar-brand" href="index.html">Start Bootstrap</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                    Menu
-                    <i class="fas fa-bars"></i>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav ms-auto py-4 py-lg-0">
-                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" th:href="@{/}">Home</a></li>
-                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" th:href="@{/aboutPage}">About</a></li>
-                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" th:href="@{/postPage}">Sample Post</a></li>
-                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" th:href="@{/contactPage}">Contact</a></li>
-                    </ul>
-                </div>
+       <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
+        <div class="container px-4 px-lg-5">
+<a href="/" style="position: absolute; top: 10px; left: 10px;">
+<img class="mx-auto rounded-circle profile-img" src="/assets/img/sx_logo.png"
+                        alt="User Profile"></a>            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                Menu
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ms-auto py-4 py-lg-0">
+                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" th:href="@{/}">Home</a></li>
+                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" th:href="@{/aboutPage}">About</a></li>
+                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" th:href="@{/postPage}">Sample Post</a></li>
+                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" th:href="@{/contactPage}">Contact</a></li>
+                </ul>
             </div>
-        </nav>
+        </div>
+    </nav>
         <!-- Page Header-->
         <header class="masthead" style="background-image: url('assets/img/post-bg.jpg')">
             <div class="container position-relative px-4 px-lg-5">
@@ -41,12 +131,7 @@
                     <div class="col-md-10 col-lg-8 col-xl-7">
                         <div class="post-heading">
                             <h1>Man must explore, and this is exploration at its greatest</h1>
-                            <h2 class="subheading">Problems look mighty small from 150 miles up</h2>
-                            <span class="meta">
-                                Posted by
-                                <a href="#!">Start Bootstrap</a>
-                                on August 24, 2023
-                            </span>
+                           
                         </div>
                     </div>
                 </div>

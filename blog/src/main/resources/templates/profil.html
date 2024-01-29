@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
@@ -20,16 +21,14 @@
             font-family: 'Arial', sans-serif;
             background-color: #f8f9fa;
             color: #495057;
-            padding: 20px;
         }
 
-        .container {
-            margin-top: 50px;
-        }
+      
 
         #content {
             background-color: #fff;
             padding: 20px;
+            margin-top : 50px ;
             border-radius: 15px;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
         }
@@ -119,7 +118,7 @@
         }
         
         
-     #mainNav {
+   #mainNav {
             background-color: #2c3e50;
             padding: 15px 0;
             border-bottom: 1px solid #34495e;
@@ -133,7 +132,6 @@
         #mainNav .nav-link {
             color: #ecf0f1 !important;
             font-size: 16px;
-            margin: 0 15px;
             transition: color 0.3s ease;
         }
 
@@ -158,90 +156,113 @@
         }
 
         #mainNav .profile-img {
-            width: 30px;
-            height: 30px;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
             margin-right: 10px;
             border: 2px solid #3498db;
         }
-        
-        
+
+        .search-form {
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+        }
+
+        .search-form .input-group {
+            max-width: 400px;
+        }
+
+        .container {
+            margin-top: 50px;
+        }
+
+        .navbar-container {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .navbar-left,
+        .navbar-center,
+        .navbar-right {
+            display: flex;
+            align-items: center;
+        }
+
+        .search-form {
+            display: flex;
+            align-items: center;
+        }
+
+        .search-form .input-group {
+            max-width: 400px;
+        }
     </style>
 </head>
 
-
-
 <body>
-    
-    
-    
-   <!-- Navbar HTML structure -->
+    <!-- Navbar HTML structure -->
     <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
-        <div class="container px-4 px-lg-5">
-            <img class="mx-auto rounded-circle profile-img" src="/assets/img/R.jpg" alt="User Profile">
+        <div class="container px-4 px-lg-5 navbar-container">
+            <!-- Left Section -->
+            <div class="navbar-left">
+                <a href="/" style="position: absolute; top: 10px; left: 10px;">
+                <img class="mx-auto rounded-circle profile-img" src="/assets/img/sx_logo.png"
+                    alt="User Profile">
+            </a>
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/"><i class="fas fa-home"></i> Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/aboutPage}"><i class="fas fa-info-circle"></i> About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/contactPage}"><i class="fas fa-envelope"></i> Contact</a>
+                    </li>
+                </ul>
+            </div>
 
-            <!-- Navbar toggle button -->
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
-                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+            <!-- Middle Section - Search Form -->
+            <div class="navbar-center">
+                <form th:action="@{/searchUserPost}" method="get" class="form-inline my-2 my-lg-0 search-form">
+                    <div class="input-group">
+                        <input class="form-control" name="query" type="search" placeholder="Search" aria-label="Search">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-light" type="submit"><i class="fas fa-search"></i></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
 
-            <!-- Navbar items and search form -->
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav ml-auto">
+            <!-- Right Section -->
+            <div class="navbar-right">
+                <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="/">Home</a>
+                        <a class="nav-link" th:href="@{/CreationPostPage}"><i class="fas fa-pencil-alt"></i> Write Post</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" th:href="@{/aboutPage}">About</a>
+                        <a class="nav-link" th:href="@{/allPosts}"><i class="fas fa-th-list"></i> All Posts</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" th:href="@{/CreationPostPage}">Add Your Post</a>
+                        <a class="nav-link" th:href="@{/forum}"><i class="fas fa-comments"></i> Forum</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" th:href="@{/allPosts}">All Posts</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" th:href="@{/contactPage}">Contact</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" th:href="@{/forum}">Forum</a>
-                    </li>
+
                     <!-- Dropdown menu -->
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Account
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-user"></i> Account
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" th:href="@{/profilPage}">Profile</a>
-                            <a class="dropdown-item" th:href="@{/askforum}">Ask</a>
-
-                            <a class="dropdown-item" th:href="@{/logOut}">Log out</a>
+                            <a class="dropdown-item" th:href="@{/profilPage}"><i class="fas fa-user"></i> Profile</a>
+                            <a class="dropdown-item" th:href="@{/askforum}"><i class="fas fa-question-circle"></i> Ask</a>
+                            <a class="dropdown-item" th:href="@{/logOut}"><i class="fas fa-sign-out-alt"></i> Log out</a>
                         </div>
                     </li>
                 </ul>
-
-                <!-- Search form -->
-                <div class="search-form">
-                    <form th:action="@{/searchUserPost}" method="get">
-                        <div class="input-group">
-                            <input class="form-control" name="query" type="search" placeholder="Search"
-                                aria-label="Search">
-                            <div class="input-group-append">
-                                <button class="btn btn-outline-light" type="submit"><i class="fas fa-search"></i></button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
             </div>
         </div>
     </nav>
-    
-    
-    
-    
-    
     
 
 
@@ -313,7 +334,7 @@
                     <p class="card-text" th:text="${#temporals.format(post.createdOn, 'dd-MM-yyyy HH:mm:ss')}"></p>
                     
                     <div class="post-card-buttons">
-                        <button class="btn btn-success mr-2 edit-post-content-btn" th:onclick="'toggleEditPostContent(' + ${post.id} + ')'" >Edit Content</button>
+                        <button class="btn btn-success mr-2 edit-post-content-btn" th:onclick="'toggleEditPostContent(' + ${post.id} + ')'" >Re-write</button>
                         <a th:href="@{'/viewPost/' + ${post.id}}" class="btn btn-primary">Read More</a>
                         <a th:href="@{'/deletePost/' + ${post.id}}" class="btn btn-danger ml-2">Delete Post</a>
                     </div>

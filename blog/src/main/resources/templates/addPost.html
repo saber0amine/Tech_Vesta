@@ -68,13 +68,45 @@
         }
 
 
+             
+    #mainNav {
+            background-color: #2c3e50; 
+            padding: 15px 0; 
+            border-bottom: 1px solid #34495e; 
+        }
+
+        #mainNav .navbar-brand img {
+            filter: brightness(0) invert(1);
+        }
+
+        #mainNav .nav-link {
+ color: #ffff !important        
+ }
+
+        #mainNav .nav-item:hover .nav-link {
+            color: #3498db !important;
+        }
+
+        #mainNav .dropdown-menu {
+            background-color: #2c3e50;
+            border: none;
+        }
+
+        #mainNav .dropdown-menu a {
+            color: #ecf0f1 !important;
+        }
+
+        #mainNav .dropdown-menu a:hover {
+            background-color: #34495e !important; 
+        }
+
         #mainNav .profile-img {
-            width: 30px;
-            height: 30px;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
             margin-right: 10px;
-            border: 2px solid #3498db;
         }
+        
         
         
     </style>
@@ -114,13 +146,13 @@
                     <div class="form-group">
                         <label for="authorImage">Your Image (JPG/PNG)</label>
                         <div class="input-group">
-                            <input type="file" class="custom-file-input" id="authorImage" name="authorImage" accept=".jpg, .jpeg, .png">
+                            <input type="file" class="custom-file-input" id="authorImage" name="authorImage" accept=" webp, .jpg, .jpeg, .png">
                             <label class="custom-file-label" for="authorImage">Choose file</label>
                         </div>
                     </div>
 
                     <button type="submit" class="btn btn-primary">Submit Post</button>
-                    <a th:href="@{/profilPage}" class="btn btn-secondary">Back to Profile</a>
+                    <a th:href="@{/allPosts}" class="btn btn-secondary">Back</a>
                 </form>
             </div>
         </div>

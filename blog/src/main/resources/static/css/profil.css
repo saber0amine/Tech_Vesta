@@ -27,13 +27,12 @@ body {
 .navbar p, .navbar button {
     margin: 0;
     padding: 5px 10px;
-    border: none;
     cursor: pointer;
 }
 
 .navbar_login {
     background-color: #007bff;
-    color: #fff;
+    color: rgb(0, 0, 160);
 }
 
 .container {
